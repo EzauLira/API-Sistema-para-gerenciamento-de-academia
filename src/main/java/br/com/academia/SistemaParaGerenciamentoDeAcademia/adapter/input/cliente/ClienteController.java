@@ -24,7 +24,7 @@ public class ClienteController {
         LOGGER.info("Inicio do método para cadastrar um novo cliente");
         long startTime = System.currentTimeMillis();
 
-        clienteCommand.cadastrarNovoCliente(clienteRequestDto);
+        String mensagem = String.valueOf(clienteCommand.cadastrarNovoCliente(clienteRequestDto));
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
@@ -32,7 +32,7 @@ public class ClienteController {
 
         return ResponseEntity.ok(
                 RespostaPadrao.builder()
-                        .mensagem(MensagemSucessoEnum.CADASTRO_EFETUADO.getMensagem())
+                        .mensagem(mensagem)
                         .build());
     }
 }

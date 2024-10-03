@@ -4,5 +4,5 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.
 
 public interface ICliente {
 
-    void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
+    String cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
 }
