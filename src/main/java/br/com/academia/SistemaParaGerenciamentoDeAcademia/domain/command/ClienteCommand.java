@@ -1,18 +1,16 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadrao;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemErroEnum;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
-import ch.qos.logback.core.net.server.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,17 +23,18 @@ public class ClienteCommand implements ICliente {
 
 
     @Override
-    public ResponseEntity<RespostaPadrao> cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
+    public void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Início do método cadastrarNovoCliente da command para cadastro de um cliente.");
 
         LOGGER.info("Verificando se o cliente existe no banco de dados.");
-        Boolean clienteExiste = iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf());
-        if (clienteExiste){
-            RespostaPadrao respostaErro = RespostaPadrao.builder()
-                    .mensagem(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem())
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respostaErro);
+        if (iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf(),
+                clienteRequestDto.getNome(), clienteRequestDto.getTelefone(), clienteRequestDto.getEmail())){
+            throw new NegocioException(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem());
         }
+
+        //Colocar validador para verificar se o telefone já existe.
+        //Colocar validador para verificar se o nome já existe.
+        //Colocar validador para verificar se o email já existe.
 
         LOGGER.info("Validando as informações do cliente.");
         ValidarNomeUtils.validarNome(clienteRequestDto.getNome());
@@ -43,6 +42,7 @@ public class ClienteCommand implements ICliente {
         ValidarCpfUtils.validarCpf(clienteRequestDto.getCpf());
         ValidarTelefoneUtils.validarTelefone(clienteRequestDto.getTelefone());
         ValidarEmailUtils.validarEmail(clienteRequestDto.getEmail());
+        ValidarSenhaUtils.validarSenha(clienteRequestDto.getSenha());
 
         LOGGER.info("Construindo o cliente.");
         Cliente cliente = Cliente.builder()
@@ -58,10 +58,5 @@ public class ClienteCommand implements ICliente {
 
         LOGGER.info("Salvando o cliente.");
         iClienteRepository.cadastrarNovoCliente(cliente);
-
-        RespostaPadrao respostaSucesso = RespostaPadrao.builder()
-                .mensagem("Cliente cadastrado com sucesso.")
-                .build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(respostaSucesso);
     }
 }

@@ -5,6 +5,6 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Client
 public interface IClienteRepository {
 
     void cadastrarNovoCliente(Cliente cliente);
-    boolean verificarSeClienteExiste(String cpf);
+    boolean verificarSeClienteExiste(String cpf, String nome, String telefone, String email);
 
 }

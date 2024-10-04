@@ -9,6 +9,7 @@ public enum MensagemExcecaoEnum {
     ENTRADA_INVALIDA("Entrada inválida. É necessário que seja um número."),
     NOME_INVALIDO("Nome inválido. É necessário que tenha no mínimo 10 caracteres e não contenha números"),
     IDADE_INVALIDA("A idade precisa ser maior que 15 anos."),
+    SENHA_INVALIDA("Senha inválida."),
     TELEFONE_INVALIDO("Telefone inválido. O telefone deve conter exatamente 11 dígitos numéricos, o DDD deve estar entre 01 e 99, o número de celular deve começar com 9 e não pode ter todos os dígitos iguais."),
     EMAIL_INVALIDO("É necessário que contenho um email valido."),
     HORA_INVALIDA("Hora inválida. Por favor, use o formato HH:mm."),

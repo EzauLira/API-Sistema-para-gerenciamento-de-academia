@@ -14,6 +14,5 @@ import org.springframework.http.HttpStatus;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RespostaPadrao {
     private String mensagem;
-    private Object dados;
 
 }

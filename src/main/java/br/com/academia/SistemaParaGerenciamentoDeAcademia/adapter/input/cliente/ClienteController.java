@@ -24,13 +24,16 @@ public class ClienteController {
         LOGGER.info("Início do método para cadastrar um novo cliente");
         long startTime = System.currentTimeMillis();
 
-        ResponseEntity<RespostaPadrao> responseEntity = clienteCommand.cadastrarNovoCliente(clienteRequestDto);
+        clienteCommand.cadastrarNovoCliente(clienteRequestDto);
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
 
-        return responseEntity;
+        return ResponseEntity.ok(
+                RespostaPadrao.builder()
+                        .mensagem(MensagemSucessoEnum.CADASTRO_EFETUADO.getMensagem())
+                        .build());
     }
 
 }

@@ -1,13 +1,29 @@
-CREATE OR REPLACE FUNCTION pessoa_existe(cpf_input VARCHAR)
-RETURNS BOOLEAN AS $$
+CREATE OR REPLACE FUNCTION public.pessoa_existe(
+    cpf_input character varying,
+    nome_input character varying,
+    email_input character varying,
+    telefone_input character varying)
+RETURNS boolean
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
 BEGIN
     RETURN EXISTS (
         SELECT 1
         FROM cliente
-        WHERE cpf = cpf_input
+        WHERE cpf = regexp_replace(cpf_input, '[^0-9]', '', 'g')
+          OR nome = nome_input
+          OR email = email_input
+          OR telefone = telefone_input
     );
 END;
-$$ LANGUAGE plpgsql;
+$BODY$;
+
+ALTER FUNCTION public.pessoa_existe(character varying, character varying, character varying, character varying)
+    OWNER TO postgres;
+
+
 
 
 SELECT pessoa_existe('43300674808')

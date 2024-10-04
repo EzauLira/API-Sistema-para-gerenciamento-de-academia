@@ -5,5 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface ICliente {
 
-    ResponseEntity cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
+    void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
 }
