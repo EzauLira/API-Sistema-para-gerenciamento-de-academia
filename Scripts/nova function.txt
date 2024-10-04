@@ -1,17 +1,13 @@
-CREATE OR REPLACE FUNCTION pessoa_existe(cpf_input varchar)
-RETURNS VARCHAR AS $$
-DECLARE
-	cpf_cliente VARCHAR;
+CREATE OR REPLACE FUNCTION pessoa_existe(cpf_input VARCHAR)
+RETURNS BOOLEAN AS $$
 BEGIN
-	SELECT cpf
-	INTO cpf_cliente
-	FROM cliente
-	WHERE cpf = cpf_input;
-	
-	RETURN cpf_cliente;
+    RETURN EXISTS (
+        SELECT 1
+        FROM cliente
+        WHERE cpf = cpf_input
+    );
 END;
 $$ LANGUAGE plpgsql;
-
 
 
 SELECT pessoa_existe('43300674808')

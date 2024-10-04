@@ -60,13 +60,13 @@ public class ClienteRepository implements IClienteRepository {
 
             jdbcTemplate.execute(sql, (PreparedStatementCallback<Object>) PreparedStatement -> {
                 PreparedStatement.setString(1, cliente.getNome());
-                PreparedStatement.setInt(1, cliente.getIdade());
-                PreparedStatement.setString(1, cliente.getCpf());
-                PreparedStatement.setInt(1, cliente.getGenero());
-                PreparedStatement.setString(1, cliente.getTelefone());
-                PreparedStatement.setString(1, cliente.getEmail());
-                PreparedStatement.setString(1, cliente.getSenha());
-                PreparedStatement.setInt(1, cliente.getIdPlano());
+                PreparedStatement.setInt(2, cliente.getIdade());
+                PreparedStatement.setString(3, cliente.getCpf());
+                PreparedStatement.setInt(4, cliente.getGenero());
+                PreparedStatement.setString(5, cliente.getTelefone());
+                PreparedStatement.setString(6, cliente.getEmail());
+                PreparedStatement.setString(7, cliente.getSenha());
+                PreparedStatement.setInt(8, cliente.getIdPlano());
                 return null;
             });
         } catch (DataAccessException e) {
@@ -74,14 +74,12 @@ public class ClienteRepository implements IClienteRepository {
         } catch (Exception e) {
             e.getMessage();
         }
-
-
     }
 
-    public Cliente verificarSeClienteExiste(String cpf) {
-
-        String sql = "SELECT pessoa_existe(?)";
-        List<Cliente> clientes = jdbcTemplate.query(sql, new Object[]{cpf}, new BeanPropertyRowMapper<>(Cliente.class));
-        return clientes.isEmpty() ? null : clientes.get(0);
+    public boolean verificarSeClienteExiste(String cpf) {
+        String sql = "SELECT * FROM pessoa_existe(?)";
+        return jdbcTemplate.queryForObject(sql, Boolean.class, cpf);
     }
+
+
 }

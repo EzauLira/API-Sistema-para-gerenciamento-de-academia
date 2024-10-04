@@ -3,7 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception;
 /**
  * Exceção lançada quando um e-mail inválido é encontrado ou quando ocorre um erro relacionado ao e-mail.
  */
-public class EmailException extends RuntimeException{
+public class EmailException extends NegocioException {
 
     /**
      * Construtor para criar uma nova instância {@link EmailException}.

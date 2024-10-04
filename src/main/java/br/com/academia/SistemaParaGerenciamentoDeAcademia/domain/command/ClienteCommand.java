@@ -25,23 +25,26 @@ public class ClienteCommand implements ICliente {
 
 
     @Override
-    public String cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
-        LOGGER.info("Inicio do método cadastrarNovoCliente da command para cadastro de um cliente.");
+    public ResponseEntity<RespostaPadrao> cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
+        LOGGER.info("Início do método cadastrarNovoCliente da command para cadastro de um cliente.");
 
-        Cliente clienteExiste = iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf());
-        if (clienteExiste != null){
-            return String.valueOf(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        LOGGER.info("Verificando se o cliente existe no banco de dados.");
+        Boolean clienteExiste = iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf());
+        if (clienteExiste){
+            RespostaPadrao respostaErro = RespostaPadrao.builder()
+                    .mensagem(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem())
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respostaErro);
         }
 
-
-        LOGGER.info("Validando as infomações do cliente.");
+        LOGGER.info("Validando as informações do cliente.");
         ValidarNomeUtils.validarNome(clienteRequestDto.getNome());
         ValidarIDadeUtils.validarIdade(clienteRequestDto.getIdade());
         ValidarCpfUtils.validarCpf(clienteRequestDto.getCpf());
         ValidarTelefoneUtils.validarTelefone(clienteRequestDto.getTelefone());
         ValidarEmailUtils.validarEmail(clienteRequestDto.getEmail());
 
-        LOGGER.info("Construindo usuario");
+        LOGGER.info("Construindo o cliente.");
         Cliente cliente = Cliente.builder()
                 .nome(clienteRequestDto.getNome())
                 .idade(clienteRequestDto.getIdade())
@@ -51,11 +54,14 @@ public class ClienteCommand implements ICliente {
                 .email(clienteRequestDto.getEmail())
                 .senha(clienteRequestDto.getSenha())
                 .idPlano(clienteRequestDto.getIdPlano())
-                .planoNome(clienteRequestDto.getPlanoNome())
                 .build();
 
+        LOGGER.info("Salvando o cliente.");
         iClienteRepository.cadastrarNovoCliente(cliente);
-        return "sucesso.";
-    }
 
+        RespostaPadrao respostaSucesso = RespostaPadrao.builder()
+                .mensagem("Cliente cadastrado com sucesso.")
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(respostaSucesso);
+    }
 }

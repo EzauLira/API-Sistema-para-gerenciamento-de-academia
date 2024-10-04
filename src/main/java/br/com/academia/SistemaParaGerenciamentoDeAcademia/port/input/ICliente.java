@@ -1,8 +1,9 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
+import org.springframework.http.ResponseEntity;
 
 public interface ICliente {
 
-    String cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
+    ResponseEntity cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
 }

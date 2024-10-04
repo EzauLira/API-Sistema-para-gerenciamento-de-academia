@@ -19,5 +19,4 @@ public class Cliente {
     private String email;
     private int idPlano;
     private String senha;
-    private String planoNome;
 }

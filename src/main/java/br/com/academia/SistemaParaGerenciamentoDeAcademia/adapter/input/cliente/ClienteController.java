@@ -20,19 +20,17 @@ public class ClienteController {
     private ICliente clienteCommand;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> cadastrarNovocliente(@RequestBody ClienteRequestDto clienteRequestDto) {
-        LOGGER.info("Inicio do método para cadastrar um novo cliente");
+    public ResponseEntity<RespostaPadrao> cadastrarNovocliente(@RequestBody ClienteRequestDto clienteRequestDto) {
+        LOGGER.info("Início do método para cadastrar um novo cliente");
         long startTime = System.currentTimeMillis();
 
-        String mensagem = String.valueOf(clienteCommand.cadastrarNovoCliente(clienteRequestDto));
+        ResponseEntity<RespostaPadrao> responseEntity = clienteCommand.cadastrarNovoCliente(clienteRequestDto);
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Tempo decorrido: " + elapsedTime + " milissegundos");
+        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
 
-        return ResponseEntity.ok(
-                RespostaPadrao.builder()
-                        .mensagem(mensagem)
-                        .build());
+        return responseEntity;
     }
+
 }

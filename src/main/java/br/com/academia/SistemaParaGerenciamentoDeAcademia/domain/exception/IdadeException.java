@@ -3,7 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception;
 /**
  * Exceção lançada quando a idade fornecida é inválida ou quando ocorre um erro relacionado à idade.
  */
-public class IdadeException extends RuntimeException {
+public class IdadeException extends NegocioException {
 
     /**
      * Construtor para criar uma nova instância {@link IdadeException}.

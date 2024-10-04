@@ -3,7 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception;
 /**
  * Exceção lançada quando um telefone inválido é encontrado ou quando ocorre um erro relacionado ao telefone.
  */
-public class TelefoneException extends RuntimeException {
+public class TelefoneException extends NegocioException {
 
     /**
      * Construtor para criar uma nova instância {@link TelefoneException}.
