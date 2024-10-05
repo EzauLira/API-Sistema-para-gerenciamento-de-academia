@@ -1,7 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadrao;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class ClienteController {
     private ICliente clienteCommand;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<RespostaPadrao> cadastrarNovocliente(@RequestBody ClienteRequestDto clienteRequestDto) {
+    public ResponseEntity<RespostaPadraoDto> cadastrarNovocliente(@RequestBody ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Início do método para cadastrar um novo cliente");
         long startTime = System.currentTimeMillis();
 
@@ -31,7 +31,7 @@ public class ClienteController {
         LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
 
         return ResponseEntity.ok(
-                RespostaPadrao.builder()
+                RespostaPadraoDto.builder()
                         .mensagem(MensagemSucessoEnum.CADASTRO_EFETUADO.getMensagem())
                         .build());
     }

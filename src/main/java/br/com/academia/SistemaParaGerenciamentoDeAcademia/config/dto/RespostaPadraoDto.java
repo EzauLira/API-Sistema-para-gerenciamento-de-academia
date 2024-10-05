@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ErroResposta {
-
+@NoArgsConstructor
+public class RespostaPadraoDto {
     private String mensagem;
+
 }

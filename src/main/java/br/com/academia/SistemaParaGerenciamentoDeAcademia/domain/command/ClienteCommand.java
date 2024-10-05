@@ -26,15 +26,11 @@ public class ClienteCommand implements ICliente {
     public void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Início do método cadastrarNovoCliente da command para cadastro de um cliente.");
 
-        LOGGER.info("Verificando se o cliente existe no banco de dados.");
-        if (iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf(),
-                clienteRequestDto.getNome(), clienteRequestDto.getTelefone(), clienteRequestDto.getEmail())){
-            throw new NegocioException(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem());
-        }
-
-        //Colocar validador para verificar se o telefone já existe.
-        //Colocar validador para verificar se o nome já existe.
-        //Colocar validador para verificar se o email já existe.
+//        LOGGER.info("Verificando se o cliente existe no banco de dados.");
+//        if (iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf(),
+//                clienteRequestDto.getNome(), clienteRequestDto.getTelefone(), clienteRequestDto.getEmail())){
+//            throw new NegocioException(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem());
+//        }
 
         LOGGER.info("Validando as informações do cliente.");
         ValidarNomeUtils.validarNome(clienteRequestDto.getNome());

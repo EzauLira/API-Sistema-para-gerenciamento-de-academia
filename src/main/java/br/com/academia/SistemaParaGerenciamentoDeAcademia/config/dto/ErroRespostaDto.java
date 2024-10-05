@@ -1,18 +1,15 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class RespostaPadrao {
-    private String mensagem;
+@AllArgsConstructor
+public class ErroRespostaDto {
 
+    private String mensagem;
 }

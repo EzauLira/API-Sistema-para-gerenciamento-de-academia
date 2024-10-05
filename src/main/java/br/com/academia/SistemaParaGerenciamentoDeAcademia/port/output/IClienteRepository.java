@@ -1,6 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import org.springframework.http.ResponseEntity;
 
 public interface IClienteRepository {
 
