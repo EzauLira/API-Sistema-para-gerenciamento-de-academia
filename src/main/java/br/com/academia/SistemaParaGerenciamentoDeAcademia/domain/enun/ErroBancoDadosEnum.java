@@ -10,7 +10,7 @@ public enum ErroBancoDadosEnum {
 
     MESMO_TREINO("O mesmo treino já está agendado", "O mesmo treino já está agendado ou você já fez este treino nesta data."),
     ERRO_DATA_E_HORA_PASSADAS("A data e hora do agendamento devem ser futuras.", "A data e/ou hora do agendamento devem ser futuras."),
-    FORA_DAS_TRES_OPCOES_DE_TREINO("Treino inválido. Deve ser 1, 2 ou 3.", "Treino escolhido inválido: Deve ser umas das opções validas"),
+    FORA_DAS_TRES_OPCOES_DE_TREINO("Treino inválido. Deve ser 1, 2 ou 3.", "Treino escolhido inválido: Deve ser umas das opções validas: (1, 2, 3)."),
     HORA_INVALIDA("valor do campo date/time está fora do intervalo:", "Horário inválido. Por favor, informe um horário válido."),
     JA_EXISTE_TREINO("Já existe um treino agendado", "Já existe um treino agendado para este cliente nesta data e hora. Deve haver pelo menos 30 minutos de diferença entre os treinos."),
     CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor reveja o nome digitado, Caso não lembre do nome cliente vá em BUSCAR DADOS."),

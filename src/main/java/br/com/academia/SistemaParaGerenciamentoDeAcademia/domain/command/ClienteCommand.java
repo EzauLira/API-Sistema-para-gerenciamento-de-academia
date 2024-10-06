@@ -1,9 +1,10 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.AgendamentoRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agendamento;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemErroEnum;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
@@ -11,7 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClienteCommand implements ICliente {
@@ -26,11 +31,6 @@ public class ClienteCommand implements ICliente {
     public void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Início do método cadastrarNovoCliente da command para cadastro de um cliente.");
 
-//        LOGGER.info("Verificando se o cliente existe no banco de dados.");
-//        if (iClienteRepository.verificarSeClienteExiste(clienteRequestDto.getCpf(),
-//                clienteRequestDto.getNome(), clienteRequestDto.getTelefone(), clienteRequestDto.getEmail())){
-//            throw new NegocioException(MensagemErroEnum.CLIENTE_JA_EXISTE.getMensagem());
-//        }
 
         LOGGER.info("Validando as informações do cliente.");
         ValidarNomeUtils.validarNome(clienteRequestDto.getNome());
@@ -54,5 +54,71 @@ public class ClienteCommand implements ICliente {
 
         LOGGER.info("Salvando o cliente.");
         iClienteRepository.cadastrarNovoCliente(cliente);
+    }
+
+    @Override
+    public void efetuarLogin(ClienteRequestDto clienteRequestDto){
+        LOGGER.info("Início do método efetuarLogin da command para um cliente.");
+
+        LOGGER.info("Validando as informações do cliente para login.");
+        ValidarCpfUtils.validarCpf(clienteRequestDto.getCpf());
+        ValidarSenhaUtils.validarSenha(clienteRequestDto.getSenha());
+
+        LOGGER.info("Construindo o cliente para login.");
+        Cliente cliente = Cliente.builder()
+                .cpf(clienteRequestDto.getCpf())
+                .senha(clienteRequestDto.getSenha())
+                .build();
+
+        iClienteRepository.efetuarLogin(cliente);
+    }
+
+    @Override
+    public void agendarTreino(AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Início do método agendarTreino da command para um cliente.");
+
+        LOGGER.info("Construindo o cliente para agendamento de um treino.");
+        Agendamento agendamento = Agendamento
+                .builder()
+                .idCliente(agendamentoRequestDto.getIdCliente())
+                .idTreino(agendamentoRequestDto.getIdTreino())
+                .data(agendamentoRequestDto.getData())
+                .hora(agendamentoRequestDto.getHora())
+                .build();
+
+        iClienteRepository.agendarTreino(agendamento);
+    }
+
+    @Override
+    public void atualizarAgendamentoDeTreino(AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Início do método ataulizarAgendamentoDeTreino da command para um cliente.");
+
+        LOGGER.info("Construindo o dados para atualizar o agendamento de um treino.");
+        Agendamento agendamento = Agendamento
+                .builder()
+                .idAgendamento(agendamentoRequestDto.getIdAgendamento())
+                .novoTreino(agendamentoRequestDto.getNovoTreino())
+                .data(agendamentoRequestDto.getData())
+                .hora(agendamentoRequestDto.getHora())
+                .build();
+
+        iClienteRepository.atualizarAgendamentoDeTreino(agendamento);
+    }
+
+    @Override
+    public void excluirAgendamentoAtivo(AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Início do método excluirAgendamentoAtivo da command para um cliente.");
+
+        LOGGER.info("Construindo o dados para atualizar o agendamento de um treino.");
+        Agendamento agendamento = Agendamento.builder()
+                .idAgendamento(agendamentoRequestDto.getIdAgendamento())
+                .build();
+
+        iClienteRepository.excluirAgendamentoAtivo(agendamento);
+    }
+
+    @Override
+    public List<ClienteResponseDto> buscarClientePorNome(String primeiroNome) {
+        return iClienteRepository.buscarDadosPessoaisPeloPrimeiroNome(primeiroNome);
     }
 }

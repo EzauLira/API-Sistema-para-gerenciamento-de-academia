@@ -1,14 +1,20 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente;
 
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.AgendamentoRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/cliente")
@@ -34,6 +40,84 @@ public class ClienteController {
                 RespostaPadraoDto.builder()
                         .mensagem(MensagemSucessoEnum.CADASTRO_EFETUADO.getMensagem())
                         .build());
+    }
+
+
+    @PostMapping("/logar")
+    public ResponseEntity<RespostaPadraoDto> efetuarLogin(@RequestBody ClienteRequestDto clienteRequestDto) {
+        LOGGER.info("Inicio do método para efetuar login - Controller");
+
+        long startTime = System.currentTimeMillis();
+
+        clienteCommand.efetuarLogin(clienteRequestDto);
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
+
+        return ResponseEntity.ok(
+                RespostaPadraoDto.builder()
+                        .mensagem(MensagemSucessoEnum.LOGIN_EFETUADO.getMensagem())
+                        .build());
+    }
+
+    @PostMapping("/agendar")
+    public ResponseEntity<RespostaPadraoDto> agendarTreino(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Inicio do método para agendar treino - Controller");
+
+        long startTime = System.currentTimeMillis();
+
+        clienteCommand.agendarTreino(agendamentoRequestDto);
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
+
+        return ResponseEntity.ok(
+                RespostaPadraoDto.builder()
+                        .mensagem(MensagemSucessoEnum.TREINO_AGENDADO.getMensagem())
+                        .build());
+    }
+
+    @PutMapping("/atualizar-agendamento")
+    public ResponseEntity<RespostaPadraoDto> atualizarAgendamentoDeTreino(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Inicio do método para atualizar o agendamento de um treino - Controller");
+
+        long startTime = System.currentTimeMillis();
+
+        clienteCommand.atualizarAgendamentoDeTreino(agendamentoRequestDto);
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
+
+        return ResponseEntity.ok(
+                RespostaPadraoDto.builder()
+                        .mensagem(MensagemSucessoEnum.TREINO_ATUALIZADO.getMensagem())
+                        .build());
+    }
+
+    @DeleteMapping("/excluir-agendamento")
+    public ResponseEntity<RespostaPadraoDto> excluirAgendamentoAtivo(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
+        LOGGER.info("Inicio do método para atualizar o agendamento de um treino - Controller");
+
+        long startTime = System.currentTimeMillis();
+
+        clienteCommand.excluirAgendamentoAtivo(agendamentoRequestDto);
+
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
+
+        return ResponseEntity.ok(
+                RespostaPadraoDto.builder()
+                        .mensagem(MensagemSucessoEnum.TREINO_EXCLUIDO.getMensagem())
+                        .build());
+    }
+
+    @GetMapping("/buscar")
+    public List<ClienteResponseDto> buscarPorNome(@RequestBody ClienteRequestDto clienteRequestDto) {
+        return clienteCommand.buscarClientePorNome(clienteRequestDto.getNome());
     }
 
 }

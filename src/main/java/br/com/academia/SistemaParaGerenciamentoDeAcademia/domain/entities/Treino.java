@@ -5,19 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe para representar um treino na academia.
+ * Esta classe é usada para armazenar as informações de um treino.
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+public class Treino {
 
-    private int idCliente;
+    private int id;
     private String nome;
-    private int idade;
-    private String cpf;
-    private int genero;
-    private String telefone;
-    private String email;
-    private int idPlano;
-    private String senha;
+    private String descricao;
+
 }
