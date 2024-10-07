@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.stereotype.Repository;
@@ -23,6 +22,10 @@ public class ClienteRepository implements IClienteRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+
+    //--------------------------------------------------------------------------------------------------------------------//
+
 
     @Override
     public void cadastrarNovoCliente(Cliente cliente) {
@@ -50,6 +53,9 @@ public class ClienteRepository implements IClienteRepository {
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+
     @Override
     public void efetuarLogin(Cliente cliente) {
         LOGGER.info("Início do método para efetuar login de um cliente - repository.");
@@ -69,9 +75,12 @@ public class ClienteRepository implements IClienteRepository {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao logar cliente.");
         }
-
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+
+    @Override
     public void agendarTreino(Agendamento agendamento){
         LOGGER.info("Início do método para agendamento de um treino - repository.");
         try{
@@ -94,6 +103,9 @@ public class ClienteRepository implements IClienteRepository {
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     public void atualizarAgendamentoDeTreino(Agendamento agendamento){
         LOGGER.info("Início do método para atualizar o agendamento de um treino - repository.");
         try{
@@ -116,6 +128,9 @@ public class ClienteRepository implements IClienteRepository {
         }
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     public void excluirAgendamentoAtivo(Agendamento agendamento){
         LOGGER.info("Início do método para excluir um agendamento antivo - repository.");
         try{
@@ -135,20 +150,35 @@ public class ClienteRepository implements IClienteRepository {
         }
     }
 
-    public List<ClienteResponseDto> buscarDadosPessoaisPeloPrimeiroNome(String primeiroNome) {
-        String sql = "SELECT * FROM public.buscar_dados_pessoais_pelo_primeiro_nome(?)";
+    //--------------------------------------------------------------------------------------------------------------------//
 
-        return jdbcTemplate.query(sql, new Object[]{primeiroNome}, (rs, rowNum) -> {
-            ClienteResponseDto cliente = new ClienteResponseDto();
-            cliente.setNome(rs.getString("nome"));
-            cliente.setCpf(rs.getString("cpf"));
-            cliente.setTelefone(rs.getString("telefone"));
-            cliente.setEmail(rs.getString("email"));
-            cliente.setSenha(rs.getString("senha"));
-            cliente.setPlanoNome(rs.getString("plano_nome"));
-            return cliente;
-        });
+
+    @Override
+    public List<ClienteResponseDto> buscarDadosPessoaisPeloPrimeiroNome(String primeiroNome) {
+        try {
+            String sql = "SELECT * FROM public.buscar_dados_pessoais_pelo_primeiro_nome(?)";
+
+            return jdbcTemplate.query(sql, new Object[]{primeiroNome}, (rs, rowNum) -> {
+                ClienteResponseDto cliente = new ClienteResponseDto();
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setSenha(rs.getString("senha"));
+                cliente.setPlanoNome(rs.getString("plano_nome"));
+                return cliente;
+            });
+        } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
+            throw new NegocioException(e.getMostSpecificCause().getMessage());
+        } catch (Exception e) {
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new NegocioException("Erro ao agendar treino.");
+        }
     }
+
+    //--------------------------------------------------------------------------------------------------------------------//
+
 
     // public boolean verificarSeClienteExiste(String cpf, String nome, String telefone, String email) {
 //        String sql = "SELECT * FROM pessoa_existe(?,?,?,?)";

@@ -1,5 +1,4 @@
-package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto;
-
+package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,17 +7,13 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class ClienteResponseDto {
-
+@AllArgsConstructor
+public class Instrutor {
     private String nome;
-    //private int idade;
     private String cpf;
-    //private int genero;
+    private int genero;
     private String telefone;
     private String email;
-    //private int idPlano;
     private String senha;
-    private String planoNome;
 }

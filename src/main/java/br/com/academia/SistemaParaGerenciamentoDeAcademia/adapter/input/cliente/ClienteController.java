@@ -18,15 +18,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/cliente")
-public class ClienteController {
+public class ClienteController implements IClienteController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
 
     @Autowired
     private ICliente clienteCommand;
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     @PostMapping("/cadastrar")
-    public ResponseEntity<RespostaPadraoDto> cadastrarNovocliente(@RequestBody ClienteRequestDto clienteRequestDto) {
+    public ResponseEntity<RespostaPadraoDto> cadastrarNovoCliente(@RequestBody ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Início do método para cadastrar um novo cliente");
         long startTime = System.currentTimeMillis();
 
@@ -42,7 +45,9 @@ public class ClienteController {
                         .build());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
 
+    @Override
     @PostMapping("/logar")
     public ResponseEntity<RespostaPadraoDto> efetuarLogin(@RequestBody ClienteRequestDto clienteRequestDto) {
         LOGGER.info("Inicio do método para efetuar login - Controller");
@@ -61,6 +66,9 @@ public class ClienteController {
                         .build());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     @PostMapping("/agendar")
     public ResponseEntity<RespostaPadraoDto> agendarTreino(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
         LOGGER.info("Inicio do método para agendar treino - Controller");
@@ -79,6 +87,9 @@ public class ClienteController {
                         .build());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     @PutMapping("/atualizar-agendamento")
     public ResponseEntity<RespostaPadraoDto> atualizarAgendamentoDeTreino(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
         LOGGER.info("Inicio do método para atualizar o agendamento de um treino - Controller");
@@ -97,6 +108,9 @@ public class ClienteController {
                         .build());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     @DeleteMapping("/excluir-agendamento")
     public ResponseEntity<RespostaPadraoDto> excluirAgendamentoAtivo(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
         LOGGER.info("Inicio do método para atualizar o agendamento de um treino - Controller");
@@ -115,9 +129,13 @@ public class ClienteController {
                         .build());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
+    @Override
     @GetMapping("/buscar")
     public List<ClienteResponseDto> buscarPorNome(@RequestBody ClienteRequestDto clienteRequestDto) {
         return clienteCommand.buscarClientePorNome(clienteRequestDto.getNome());
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
 }
