@@ -20,11 +20,11 @@ public class GlobalExceptionHandler {
         LOGGER.error("NegocioException: {}", e.getMessage(), e);
 
         if (e instanceof CpfException
-                || e instanceof  SenhaException
-                || e instanceof EmailException
-                || e instanceof IdadeException
-                || e instanceof NomeException
-                || e instanceof TelefoneException) {
+           || e instanceof SenhaException
+           || e instanceof EmailException
+           || e instanceof IdadeException
+           || e instanceof NomeException
+           || e instanceof TelefoneException) {
 
             ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
             return new ResponseEntity<>(erroRespostaDto, HttpStatus.BAD_REQUEST);

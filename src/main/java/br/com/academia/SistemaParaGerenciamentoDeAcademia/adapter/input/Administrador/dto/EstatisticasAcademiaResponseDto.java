@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EstatisticasResponseDto {
+public class EstatisticasAcademiaResponseDto {
 
     private String totalClientes;
     private String planoMensalVendido;

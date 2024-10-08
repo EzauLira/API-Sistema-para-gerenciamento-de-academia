@@ -1,7 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.AdministradorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
@@ -68,7 +68,7 @@ public class AdministradorController implements IAdministradorController{
 
     @Override
     @GetMapping("/buscar-estatistica")
-    public List<EstatisticasResponseDto> listarEstatisticasDaAcademia() {
+    public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia() {
         return administradorCommand.listarEstatisticasDaAcademia();
     }
 }

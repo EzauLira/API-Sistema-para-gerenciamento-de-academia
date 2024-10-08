@@ -1,7 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.AdministradorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Administrador;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
@@ -70,7 +70,7 @@ public class AdministradorCommand implements IAdministrador {
     }
 
     @Override
-    public List<EstatisticasResponseDto> listarEstatisticasDaAcademia(){
+    public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia(){
         return iadministradorRepository.listarEstatisticasDaAcademia();
     }
 

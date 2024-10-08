@@ -1,6 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Administrador;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
@@ -78,12 +78,13 @@ public class AdminstradorRepository implements IAdministradorRepository {
 
 
     @Override
-    public List<EstatisticasResponseDto> listarEstatisticasDaAcademia() {
+    public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia() {
+        LOGGER.info("Início do método para listar estatisticas da academia - repository.");
         try {
             String sql = "SELECT * FROM gerar_relatorio_academia()";
 
             return jdbcTemplate.query(sql, new Object[]{}, (rs, rowNum) -> {
-                EstatisticasResponseDto estatistica = new EstatisticasResponseDto();
+                EstatisticasAcademiaResponseDto estatistica = new EstatisticasAcademiaResponseDto();
                 estatistica.setTotalClientes(rs.getString("total_clientes"));
                 estatistica.setPlanoMensalVendido(rs.getString("plano_mensal_vendido"));
                 estatistica.setPlanoAnualVendido(rs.getString("plano_anual_vendido"));

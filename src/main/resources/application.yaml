@@ -18,5 +18,5 @@ spring:
     maximumPoolSize: 3
     minimumIdle: 2
     idleTimeout: 20000
-    poolName: SistemaDeControleDeNotaspool
+    poolName: SistemaParaGerenciamentoDeAcademia
 

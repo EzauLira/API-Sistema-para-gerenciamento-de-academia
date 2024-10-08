@@ -1,7 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.AdministradorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +48,7 @@ public interface IAdministradorController{
             @ApiResponse(code = 400, message = "Dados da academia inválidos"),
             @ApiResponse(code = 500, message = "Erro interno do servidor")
     })
-    List<EstatisticasResponseDto> listarEstatisticasDaAcademia();
+    List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia();
 
 
     //--------------------------------------------------------------------------------------------------------------------//
