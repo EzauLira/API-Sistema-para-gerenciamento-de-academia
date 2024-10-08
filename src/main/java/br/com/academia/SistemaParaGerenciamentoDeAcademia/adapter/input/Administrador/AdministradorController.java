@@ -69,6 +69,7 @@ public class AdministradorController implements IAdministradorController{
     @Override
     @GetMapping("/buscar-estatistica")
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia() {
+        LOGGER.info("Início do método para listar estatísticas da academia");
         return administradorCommand.listarEstatisticasDaAcademia();
     }
 }

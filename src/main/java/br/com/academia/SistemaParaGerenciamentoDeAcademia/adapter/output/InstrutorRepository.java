@@ -23,6 +23,7 @@ public class InstrutorRepository implements IInstrutorRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    //------------------------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public void efetuarLoginInstrutor(Instrutor instrutor) {
@@ -36,6 +37,7 @@ public class InstrutorRepository implements IInstrutorRepository {
                 preparedStatement.execute();
                 return null;
             });
+
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioException(e.getMostSpecificCause().getMessage());
@@ -44,6 +46,8 @@ public class InstrutorRepository implements IInstrutorRepository {
             throw new NegocioException("Erro ao logar.");
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia() {
@@ -67,4 +71,54 @@ public class InstrutorRepository implements IInstrutorRepository {
             throw new NegocioException("Erro ao listar agendamento do dia.");
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    @Override
+    public List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome) {
+        LOGGER.info("Início do método para listar treinos de um cliente específico - repository.");
+        try {
+            String sql = "SELECT * FROM listar_treinos_de_um_cliente_especifico(?)";
+
+            return jdbcTemplate.query(sql, new Object[]{nome}, (rs, rowNum) -> {
+                AgendamentosDoDiaResponseDto agendamento = new AgendamentosDoDiaResponseDto();
+                agendamento.setTreinoNome(rs.getString("treino_nome"));
+                agendamento.setData(rs.getString("data"));
+                agendamento.setHora(rs.getString("hora"));
+                return agendamento;
+            });
+        } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
+            throw new NegocioException(e.getMostSpecificCause().getMessage());
+        } catch (Exception e) {
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new NegocioException("Erro ao listar treino de um cliente específico.");
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    @Override
+    public List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome) {
+        LOGGER.info("Início do método para buscar histórico de um cliente específico - repository.");
+        try {
+            String sql = "SELECT * FROM listar_todos_treinos_por_cliente(?)";
+
+            return jdbcTemplate.query(sql, new Object[]{nome}, (rs, rowNum) -> {
+                AgendamentosDoDiaResponseDto agendamento = new AgendamentosDoDiaResponseDto();
+                agendamento.setTreinoNome(rs.getString("treino_nome"));
+                agendamento.setData(rs.getString("data"));
+                agendamento.setHora(rs.getString("hora"));
+                return agendamento;
+            });
+        } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
+            throw new NegocioException(e.getMostSpecificCause().getMessage());
+        } catch (Exception e) {
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new NegocioException("Erro ao listar todos os treinos de um cliente.");
+        }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
 }

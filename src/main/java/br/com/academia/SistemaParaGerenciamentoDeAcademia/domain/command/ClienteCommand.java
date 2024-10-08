@@ -26,6 +26,7 @@ public class ClienteCommand implements ICliente {
    @Autowired
    IClienteRepository iClienteRepository;
 
+    //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public void cadastrarNovoCliente(ClienteRequestDto clienteRequestDto) {
@@ -56,6 +57,8 @@ public class ClienteCommand implements ICliente {
         iClienteRepository.cadastrarNovoCliente(cliente);
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
     @Override
     public void efetuarLogin(ClienteRequestDto clienteRequestDto){
         LOGGER.info("Início do método efetuarLogin da command para um cliente.");
@@ -70,8 +73,11 @@ public class ClienteCommand implements ICliente {
                 .senha(clienteRequestDto.getSenha())
                 .build();
 
+        LOGGER.info("Salvando os dados.");
         iClienteRepository.efetuarLogin(cliente);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public void agendarTreino(AgendamentoRequestDto agendamentoRequestDto){
@@ -86,8 +92,11 @@ public class ClienteCommand implements ICliente {
                 .hora(agendamentoRequestDto.getHora())
                 .build();
 
+        LOGGER.info("Salvando os dados.");
         iClienteRepository.agendarTreino(agendamento);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public void atualizarAgendamentoDeTreino(AgendamentoRequestDto agendamentoRequestDto){
@@ -102,8 +111,11 @@ public class ClienteCommand implements ICliente {
                 .hora(agendamentoRequestDto.getHora())
                 .build();
 
+        LOGGER.info("Salvando os dados.");
         iClienteRepository.atualizarAgendamentoDeTreino(agendamento);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
     public void excluirAgendamentoAtivo(AgendamentoRequestDto agendamentoRequestDto){
@@ -114,11 +126,18 @@ public class ClienteCommand implements ICliente {
                 .idAgendamento(agendamentoRequestDto.getIdAgendamento())
                 .build();
 
+        LOGGER.info("Salvando os dados.");
         iClienteRepository.excluirAgendamentoAtivo(agendamento);
     }
 
+    //--------------------------------------------------------------------------------------------------------------------//
+
     @Override
     public List<ClienteResponseDto> buscarClientePorNome(String primeiroNome) {
+        LOGGER.info("Início do método buscarClientePorNome da command para um cliente.");
         return iClienteRepository.buscarDadosPessoaisPeloPrimeiroNome(primeiroNome);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------//
+
 }

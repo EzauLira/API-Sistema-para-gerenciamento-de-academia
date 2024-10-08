@@ -111,7 +111,7 @@ public class ClienteController implements IClienteController {
     @Override
     @DeleteMapping("/excluir-agendamento")
     public ResponseEntity<RespostaPadraoDto> excluirAgendamentoAtivo(@RequestBody AgendamentoRequestDto agendamentoRequestDto){
-        LOGGER.info("Inicio do método para atualizar o agendamento de um treino - Controller");
+        LOGGER.info("Inicio do método para excluir um agendamento ativo - Controller");
 
         long startTime = System.currentTimeMillis();
 
@@ -132,6 +132,7 @@ public class ClienteController implements IClienteController {
     @Override
     @GetMapping("/buscar")
     public List<ClienteResponseDto> buscarPorNome(@RequestBody ClienteRequestDto clienteRequestDto) {
+        LOGGER.info("Início do método para buscar um cliente pelo nome - Controller");
         return clienteCommand.buscarClientePorNome(clienteRequestDto.getNome());
     }
 

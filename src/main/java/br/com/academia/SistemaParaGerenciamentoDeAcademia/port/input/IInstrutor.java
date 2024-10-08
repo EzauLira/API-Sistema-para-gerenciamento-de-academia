@@ -8,5 +8,19 @@ import java.util.List;
 public interface IInstrutor {
 
     void efetuarLoginInstrutor(InstrutorRequestDto instrutorRequestDto);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
     List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia();
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
 }

@@ -13,12 +13,9 @@ import lombok.NoArgsConstructor;
 public class ClienteResponseDto {
 
     private String nome;
-    //private int idade;
     private String cpf;
-    //private int genero;
     private String telefone;
     private String email;
-    //private int idPlano;
     private String senha;
     private String planoNome;
 }

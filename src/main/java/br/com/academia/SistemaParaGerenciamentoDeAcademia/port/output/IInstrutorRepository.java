@@ -9,5 +9,18 @@ public interface IInstrutorRepository {
 
     void efetuarLoginInstrutor(Instrutor instrutor);
 
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
     List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia();
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
 }

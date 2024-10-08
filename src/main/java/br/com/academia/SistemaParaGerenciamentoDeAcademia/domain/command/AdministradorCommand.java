@@ -71,6 +71,7 @@ public class AdministradorCommand implements IAdministrador {
 
     @Override
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia(){
+        LOGGER.info("Início do método listarEstatisticasDaAcademia da command para um ADM");
         return iadministradorRepository.listarEstatisticasDaAcademia();
     }
 

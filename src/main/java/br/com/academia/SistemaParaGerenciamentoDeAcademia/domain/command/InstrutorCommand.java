@@ -19,9 +19,11 @@ public class InstrutorCommand implements IInstrutor {
     @Autowired
     IInstrutorRepository iInstrutorRepository;
 
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
     @Override
     public void efetuarLoginInstrutor(InstrutorRequestDto instrutorRequestDto){
-        LOGGER.info("Início do método efetuarLogin da command para um ADM.");
+        LOGGER.info("Início do método efetuarLogin da command para instrutor.");
 
         LOGGER.info("Construindo o ADM para login - command.");
         Instrutor instrutor = Instrutor.builder()
@@ -33,8 +35,30 @@ public class InstrutorCommand implements IInstrutor {
         iInstrutorRepository.efetuarLoginInstrutor(instrutor);
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
     @Override
     public List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia(){
+        LOGGER.info("Início do método listarAgendamentoDoDia da command para instrutor.");
        return iInstrutorRepository.listarAgendamentoDoDia();
     }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    @Override
+    public List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome) {
+        LOGGER.info("Início do método listarTreinosDeUmClienteEspecifico da command para instrutor.");
+        return iInstrutorRepository.listarTreinosDeUmClienteEspecifico(nome);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+    @Override
+    public List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome) {
+        LOGGER.info("Início do método buscarHistoricoDeUmClienteEspecifico da command para instrutor.");
+        return iInstrutorRepository.buscarHistoricoDeUmClienteEspecifico(nome);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
 }

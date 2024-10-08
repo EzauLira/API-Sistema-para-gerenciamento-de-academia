@@ -26,7 +26,6 @@ public class ClienteRepository implements IClienteRepository {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-
     @Override
     public void cadastrarNovoCliente(Cliente cliente) {
         LOGGER.info("Início do método para cadastrar um novo cliente - repository.");
@@ -55,7 +54,6 @@ public class ClienteRepository implements IClienteRepository {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-
     @Override
     public void efetuarLogin(Cliente cliente) {
         LOGGER.info("Início do método para efetuar login de um cliente - repository.");
@@ -78,7 +76,6 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
-
 
     @Override
     public void agendarTreino(Agendamento agendamento){
@@ -152,9 +149,9 @@ public class ClienteRepository implements IClienteRepository {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-
     @Override
     public List<ClienteResponseDto> buscarDadosPessoaisPeloPrimeiroNome(String primeiroNome) {
+        LOGGER.info("Início do método para buscar dados pessoais pelo primeiro nome - repository.");
         try {
             String sql = "SELECT * FROM public.buscar_dados_pessoais_pelo_primeiro_nome(?)";
 

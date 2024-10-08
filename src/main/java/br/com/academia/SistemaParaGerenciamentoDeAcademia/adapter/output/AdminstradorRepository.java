@@ -28,7 +28,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
 
     @Override
     public void cadastrarNovoInstrutor(Instrutor instrutor) {
-        LOGGER.info("Início do método para cadastrar um novo cliente - repository.");
+        LOGGER.info("Início do método para cadastrar um novo instrutor - repository.");
         try {
             String sql = "SELECT cadastrar_instrutor(?, ?, ?, ?, ?, ?)";
             jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
@@ -55,7 +55,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
 
     @Override
     public void efetuarLogin(Administrador administrador) {
-        LOGGER.info("Início do método para efetuar login de um cliente - repository.");
+        LOGGER.info("Início do método para efetuar login de um ADM - repository.");
         try {
             String sql = "SELECT * FROM login_admin(?,?)";
 
