@@ -1,7 +1,11 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemExcecaoEnum;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ILogin;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.ValidarCpfUtils;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.ValidarSenhaUtils;
@@ -18,15 +22,28 @@ public class LoginCommand implements ILogin {
     @Autowired
     ILoginRepository iLoginRepository;
 
+    @Autowired
+    ISegurancaConfig iSegurancaConfig;
+
     @Override
-    public void login(LoginRequestDto loginRequestDto) {
+    public String login(LoginRequestDto loginRequestDto) {
         LOGGER.info("Início do método efetuarLogin na command.");
 
 
-        LOGGER.info("Validando as informações para login.");
+        LOGGER.info("Validando as informações para login - command.");
         ValidarCpfUtils.validarCpf(loginRequestDto.getCpf());
         ValidarSenhaUtils.validarSenha(loginRequestDto.getSenha());
 
+        LOGGER.info("Verificando se a pessoa existe na base de dados - command");
+        Cliente cliente = iLoginRepository.existePessoa(loginRequestDto.getCpf());
+
+        LOGGER.info("Autenticando o usuario");
+        if (iSegurancaConfig.compararSenhaHash(loginRequestDto.getSenha(), cliente.getSenha())) {
+            return iSegurancaConfig.gerarToken(cliente);
+        }
+
         iLoginRepository.login(loginRequestDto);
+
+        throw new NegocioException(MensagemExcecaoEnum.ERRO_AUTENTICAR.getMensagem());
     }
 }

@@ -37,6 +37,7 @@ public enum ErroBancoDadosEnum {
     ERRO_LOGAR_ADMIN_SENHA_VAZIO("A senha não pode ser vazia", "A senha não pode ser vazia"),
     ERRO_LOGAR_ADMIN_USUARIO_NAO_ENCONTRADO("Usuário não encontrado na base de dados", "Usuário não encontrado na base de dados"),
     ERRO_LOGAR_ADMIN_SENHA_INCORRETA("Senha incorreta", "Senha incorreta"),
+    ERRO_AUTENTICAR("Não foi possível autenticar.", "Não foi possível autenticar."),
     ERRO_LISTAR_AGENDAMENTO_HOJE("Nenhum agendamento encontrado para a data atual.", "Nenhum agendamento encontrado para a data atual."),
     ERRO_NOME_VAZIO_NA_BUSCA_POR_PESSOA_ESPECIFICA("O nome não pode ser vazio. Por favor, forneça um nome válido.", "O nome não pode ser vazio. Por favor, forneça um nome válido."),
     OUTRO_ERRO("Outro erro", "Erro não catalogado. Favor, entre em contato com nosso suporte técnico.");

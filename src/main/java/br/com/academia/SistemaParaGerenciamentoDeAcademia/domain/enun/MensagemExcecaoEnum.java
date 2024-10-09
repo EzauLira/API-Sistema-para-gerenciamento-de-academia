@@ -14,6 +14,7 @@ public enum MensagemExcecaoEnum {
     EMAIL_INVALIDO("É necessário que contenho um email valido."),
     HORA_INVALIDA("Hora inválida. Por favor, use o formato HH:mm."),
     DATA_INVALIDA("Data inválida. É necessária que seja no formato 01/01/2024"),
+    ERRO_AUTENTICAR("Não foi possível autenticar."),
     CPF_INVALIDO("CPF inválido. O CPF deve conter exatamente 11 dígitos numéricos e não pode conter todos os dígitos iguais.");
 
     private final String mensagem;

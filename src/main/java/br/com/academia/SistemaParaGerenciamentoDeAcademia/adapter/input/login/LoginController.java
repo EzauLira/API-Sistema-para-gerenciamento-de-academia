@@ -1,6 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.TokenResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ILogin;
@@ -30,7 +31,7 @@ public class LoginController implements ILoginController{
 
         long startTime = System.currentTimeMillis();
 
-        loginCommand.login(loginRequestDto);
+        TokenResponseDto tokenResponseDto = new TokenResponseDto(loginCommand.login(loginRequestDto));
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
@@ -38,7 +39,7 @@ public class LoginController implements ILoginController{
 
         return ResponseEntity.ok(
                 RespostaPadraoDto.builder()
-                        .mensagem(MensagemSucessoEnum.LOGIN_EFETUADO.getMensagem())
+                        .mensagem(MensagemSucessoEnum.LOGIN_EFETUADO.getMensagem()).dados(tokenResponseDto)
                         .build());
     }
 }

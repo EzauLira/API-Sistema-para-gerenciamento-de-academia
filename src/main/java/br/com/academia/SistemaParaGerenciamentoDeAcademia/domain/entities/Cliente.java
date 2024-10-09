@@ -1,5 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities;
 
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,5 @@ public class Cliente {
     private String email;
     private int idPlano;
     private String senha;
+    private TipoUsuarioEnum tipoUsuario;
 }

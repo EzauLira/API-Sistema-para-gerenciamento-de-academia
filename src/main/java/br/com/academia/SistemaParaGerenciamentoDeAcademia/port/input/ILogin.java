@@ -5,5 +5,5 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dt
 public interface ILogin {
 
 
-    void login(LoginRequestDto loginRequestDto);
+    String login(LoginRequestDto loginRequestDto);
 }

@@ -237,3 +237,33 @@ END;
 $BODY$;
 ALTER FUNCTION public.login(character varying, character varying)
    OWNER TO postgres;
+
+
+
+   nova funcionalidade para verificar se cliente existe:
+
+   CREATE OR REPLACE FUNCTION public.verificar_cpf(
+      p_cpf character varying)
+      RETURNS BOOLEAN
+      LANGUAGE 'plpgsql'
+      COST 100
+      VOLATILE PARALLEL UNSAFE
+   AS $BODY$
+   DECLARE
+      v_exists BOOLEAN;
+   BEGIN
+      -- Remover pontuação do CPF
+      p_cpf := REPLACE(REPLACE(REPLACE(p_cpf, '.', ''), '-', ''), ' ', '');
+      -- Verificar se o CPF existe em qualquer uma das tabelas
+      SELECT EXISTS (
+          SELECT 1 FROM administrador WHERE cpf = p_cpf
+          UNION ALL
+          SELECT 1 FROM instrutor WHERE cpf = p_cpf
+          UNION ALL
+          SELECT 1 FROM cliente WHERE cpf = p_cpf
+      ) INTO v_exists;
+      RETURN v_exists;
+   END;
+   $BODY$;
+   ALTER FUNCTION public.verificar_cpf(character varying)
+      OWNER TO postgres;

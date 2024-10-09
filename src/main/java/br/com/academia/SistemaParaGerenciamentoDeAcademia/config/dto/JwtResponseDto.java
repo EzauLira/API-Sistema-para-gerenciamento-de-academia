@@ -1,6 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class RespostaPadraoDto {
-    private String mensagem;
-    private Object dados;
+public class JwtResponseDto {
 
+    private int id;
+    private String email;
+    private String senha;
+    private TipoUsuarioEnum tipoUsuario;
 }

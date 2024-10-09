@@ -1,0 +1,46 @@
+[
+  {
+    "path": "/v1/login/logar",
+    "roles": []
+  },
+  {
+    "path": "/v1/adm/cadastrar-instrutor",
+    "roles": ["ADMINISTRADOR"]
+  },
+  {
+    "path": "/v1/admin/buscar-estatistica",
+    "roles": ["ADMINISTRADOR"]
+  },
+  {
+    "path": "/v1/cliente/cadastrar",
+    "roles": ["CLIENTE"]
+  },
+  {
+    "path": "/v1/cliente/agendar",
+    "roles": ["CLIENTE"]
+  },
+  {
+    "path": "/v1/cliente/atualizar-agendamento",
+    "roles": ["CLIENTE"]
+  },
+  {
+    "path": "/v1/cliente/excluir-agendamento",
+    "roles": ["CLIENTE"]
+  },
+  {
+    "path": "/v1/cliente/buscar",
+    "roles": ["CLIENTE"]
+  },
+  {
+    "path": "/v1/instrutor/agendamento-dia",
+    "roles": ["INSTRUTOR"]
+  },
+  {
+    "path": "/v1/instrutor/agendamento-especifico",
+    "roles": ["INSTRUTOR"]
+  },
+  {
+    "path": "/v1/instrutor/historico",
+    "roles": ["INSTRUTOR"]
+  }
+]
