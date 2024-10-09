@@ -1,14 +1,12 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.AgendamentosDoDiaResponseDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IInstrutorRepository;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 
 import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -25,27 +23,25 @@ public class InstrutorRepository implements IInstrutorRepository {
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 
-    @Override
-    public void efetuarLoginInstrutor(Instrutor instrutor) {
-        LOGGER.info("Início do método para efetuar login de um instrutor - repository.");
-        try {
-            String sql = "SELECT * FROM login_instrutor(?,?)";
-
-            jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
-                preparedStatement.setString(1, instrutor.getCpf());
-                preparedStatement.setString(2, instrutor.getSenha());
-                preparedStatement.execute();
-                return null;
-            });
-
-        } catch (DataAccessException e) {
-            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
-        } catch (Exception e) {
-            LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException("Erro ao logar.");
-        }
-    }
+//    @Override
+//    public void efetuarLoginInstrutor(Instrutor instrutor) {
+//        LOGGER.info("Início do método para efetuar login de um instrutor - repository.");
+//        try {
+//            String sql = "SELECT * FROM login_instrutor(?,?)";
+//
+//            jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
+//                preparedStatement.setString(1, instrutor.getCpf());
+//                preparedStatement.setString(2, instrutor.getSenha());
+//                preparedStatement.execute();
+//                return null;
+//            });
+//
+//        } catch (DataAccessException e) {
+//            throw new NegocioException(e.getMostSpecificCause().getMessage());
+//        } catch (Exception e) {
+//            throw new NegocioException("Erro ao logar.");
+//        }
+//    }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -64,10 +60,8 @@ public class InstrutorRepository implements IInstrutorRepository {
             });
 
         } catch (DataAccessException e) {
-            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao listar agendamento do dia.");
         }
     }
@@ -88,10 +82,8 @@ public class InstrutorRepository implements IInstrutorRepository {
                 return agendamento;
             });
         } catch (DataAccessException e) {
-            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao listar treino de um cliente específico.");
         }
     }
@@ -112,10 +104,8 @@ public class InstrutorRepository implements IInstrutorRepository {
                 return agendamento;
             });
         } catch (DataAccessException e) {
-            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao listar todos os treinos de um cliente.");
         }
     }

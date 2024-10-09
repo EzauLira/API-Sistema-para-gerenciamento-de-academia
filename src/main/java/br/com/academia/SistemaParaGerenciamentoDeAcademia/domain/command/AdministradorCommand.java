@@ -1,9 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.AdministradorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Administrador;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.IAdministrador;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IAdministradorRepository;
@@ -55,19 +53,19 @@ public class AdministradorCommand implements IAdministrador {
     //--------------------------------------------------------------------------------------------------------------------//
 
 
-    @Override
-    public void efetuarLogin(AdministradorRequestDto administradorRequestDto){
-        LOGGER.info("Início do método efetuarLogin da command para um ADM.");
-
-        LOGGER.info("Construindo o ADM para login - command.");
-        Administrador administrador = Administrador.builder()
-                .usuario(administradorRequestDto.getUsuario())
-                .senha(administradorRequestDto.getSenha())
-                .build();
-
-        LOGGER.info("Salvando os dados do ADM - command.");
-       iadministradorRepository.efetuarLogin(administrador);
-    }
+//    @Override
+//    public void efetuarLogin(AdministradorRequestDto administradorRequestDto){
+//        LOGGER.info("Início do método efetuarLogin da command para um ADM.");
+//
+//        LOGGER.info("Construindo o ADM para login - command.");
+//        Administrador administrador = Administrador.builder()
+//                .usuario(administradorRequestDto.getUsuario())
+//                .senha(administradorRequestDto.getSenha())
+//                .build();
+//
+//        LOGGER.info("Salvando os dados do ADM - command.");
+//       iadministradorRepository.efetuarLogin(administrador);
+//    }
 
     @Override
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia(){

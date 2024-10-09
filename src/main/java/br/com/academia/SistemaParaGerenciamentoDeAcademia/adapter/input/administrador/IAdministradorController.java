@@ -1,7 +1,6 @@
-package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador;
+package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador;
 
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.AdministradorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto.EstatisticasAcademiaResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import io.swagger.annotations.ApiResponse;
@@ -17,13 +16,13 @@ public interface IAdministradorController{
     //--------------------------------------------------------------------------------------------------------------------//
 
 
-    @Operation(summary = "Login do ADM", description = "Loga um ADM.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Login efetuado com sucesso"),
-            @ApiResponse(code = 400, message = "Dados de login inválidos"),
-            @ApiResponse(code = 500, message = "Erro interno do servidor")
-    })
-    ResponseEntity<RespostaPadraoDto> efetuarLogin(AdministradorRequestDto administradorRequestDto);
+//    @Operation(summary = "Login do ADM", description = "Loga um ADM.")
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Login efetuado com sucesso"),
+//            @ApiResponse(code = 400, message = "Dados de login inválidos"),
+//            @ApiResponse(code = 500, message = "Erro interno do servidor")
+//    })
+//    ResponseEntity<RespostaPadraoDto> efetuarLogin(LoginRequestDto loginRequestDto);
 
 
     //--------------------------------------------------------------------------------------------------------------------//

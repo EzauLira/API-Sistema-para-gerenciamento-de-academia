@@ -1,10 +1,9 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.AgendamentosDoDiaResponseDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.IInstrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IInstrutorRepository;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,21 +18,18 @@ public class InstrutorCommand implements IInstrutor {
     @Autowired
     IInstrutorRepository iInstrutorRepository;
 
+    @Autowired
+    ILoginRepository iLoginRepository;
+
     //------------------------------------------------------------------------------------------------------------------------------------//
 
-    @Override
-    public void efetuarLoginInstrutor(InstrutorRequestDto instrutorRequestDto){
-        LOGGER.info("Início do método efetuarLogin da command para instrutor.");
-
-        LOGGER.info("Construindo o ADM para login - command.");
-        Instrutor instrutor = Instrutor.builder()
-                .cpf(instrutorRequestDto.getCpf())
-                .senha(instrutorRequestDto.getSenha())
-                .build();
-
-        LOGGER.info("Salvando os dados do ADM - command.");
-        iInstrutorRepository.efetuarLoginInstrutor(instrutor);
-    }
+//    @Override
+//    public void efetuarLoginInstrutor(LoginRequestDto loginRequestDto){
+//        LOGGER.info("Início do método efetuarLogin da command para instrutor.");
+//
+//        LOGGER.info("Mandando os dados de login - command.");
+//        iLoginRepository.login(loginRequestDto);
+//    }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 

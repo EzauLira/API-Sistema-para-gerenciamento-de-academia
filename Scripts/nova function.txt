@@ -59,3 +59,181 @@ $BODY$;
 
 ALTER FUNCTION public.pessoa_existe(character varying)
     OWNER TO postgres;
+
+
+
+
+login cliente antigo:
+
+-- FUNCTION: public.login_cliente(character varying, character varying)
+
+-- DROP FUNCTION IF EXISTS public.login_cliente(character varying, character varying);
+
+CREATE OR REPLACE FUNCTION public.login_cliente(
+	p_cpf character varying,
+	p_senha character varying)
+    RETURNS TABLE(cliente_id integer, status text)
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+DECLARE
+   v_senha_db VARCHAR;
+BEGIN
+   -- Remover pontuação do CPF
+   p_cpf := REPLACE(REPLACE(REPLACE(p_cpf, '.', ''), '-', ''), ' ', '');
+   -- Buscar o ID do cliente e a senha associada
+   SELECT id, senha INTO cliente_id, v_senha_db
+   FROM cliente
+   WHERE cpf = p_cpf;
+   -- Se o CPF não for encontrado
+   IF NOT FOUND THEN
+       RAISE EXCEPTION 'CPF não cadastrado';
+   END IF;
+   -- Verificar se a senha está correta
+   IF v_senha_db != p_senha THEN
+       RAISE EXCEPTION 'Senha incorreta';
+   END IF;
+   -- Retornar o ID do cliente e a mensagem de sucesso
+   RETURN QUERY SELECT cliente_id, 'Login realizado com sucesso';
+END;
+$BODY$;
+
+ALTER FUNCTION public.login_cliente(character varying, character varying)
+    OWNER TO postgres;
+
+
+
+Login instrutor antigo:
+
+
+-- FUNCTION: public.login_instrutor(character varying, character varying)
+
+-- DROP FUNCTION IF EXISTS public.login_instrutor(character varying, character varying);
+
+CREATE OR REPLACE FUNCTION public.login_instrutor(
+	p_cpf character varying,
+	p_senha character varying)
+    RETURNS TABLE(instrutor_id integer, status text)
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+DECLARE
+   v_senha_db VARCHAR;
+BEGIN
+   -- Remover pontuação do CPF
+   p_cpf := REPLACE(REPLACE(REPLACE(p_cpf, '.', ''), '-', ''), ' ', '');
+   -- Buscar o ID do cliente e a senha associada
+   SELECT id, senha INTO instrutor_id, v_senha_db
+   FROM instrutor
+   WHERE cpf = p_cpf;
+   -- Se o CPF não for encontrado
+   IF NOT FOUND THEN
+       RAISE EXCEPTION 'CPF não cadastrado';
+   END IF;
+   -- Verificar se a senha está correta
+   IF v_senha_db != p_senha THEN
+       RAISE EXCEPTION 'Senha incorreta';
+   END IF;
+   -- Retornar o ID do cliente e a mensagem de sucesso
+   RETURN QUERY SELECT instrutor_id, 'Login realizado com sucesso';
+END;
+$BODY$;
+
+ALTER FUNCTION public.login_instrutor(character varying, character varying)
+    OWNER TO postgres;
+
+
+Login administrador antigo:
+
+
+
+-- FUNCTION: public.login_admin(character varying, character varying)
+
+-- DROP FUNCTION IF EXISTS public.login_admin(character varying, character varying);
+
+CREATE OR REPLACE FUNCTION public.login_admin(
+	novo_usuario character varying,
+	nova_senha character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    usuario_existente RECORD;
+BEGIN
+    -- Verifica se o usuário ou a senha são vazios
+    IF novo_usuario IS NULL OR novo_usuario = '' THEN
+        RAISE EXCEPTION 'O nome do usuário não pode ser vazio';
+    ELSIF nova_senha IS NULL OR nova_senha = '' THEN
+        RAISE EXCEPTION 'A senha não pode ser vazia';
+    END IF;
+
+    -- Verifica se o usuário já existe e a senha está correta
+    SELECT * INTO usuario_existente
+    FROM administrador
+    WHERE LOWER(usuario) = LOWER(novo_usuario);
+
+    IF usuario_existente IS NULL THEN
+        RAISE EXCEPTION 'Usuário não encontrado na base de dados';
+    ELSIF LOWER(usuario_existente.senha) <> LOWER(nova_senha) THEN
+        RAISE EXCEPTION 'Senha incorreta';
+    END IF;
+    -- Se passar por todas as verificações, a função termina sem erros
+END;
+$BODY$;
+
+ALTER FUNCTION public.login_admin(character varying, character varying)
+    OWNER TO postgres;
+
+
+
+ login para geral:
+
+
+
+
+CREATE OR REPLACE FUNCTION public.login(
+   p_cpf character varying,
+   p_senha character varying)
+   RETURNS TABLE(administrador_id integer, status text)
+   LANGUAGE 'plpgsql'
+   COST 100
+   VOLATILE PARALLEL UNSAFE
+   ROWS 1000
+AS $BODY$
+DECLARE
+   v_senha_db VARCHAR;
+BEGIN
+   -- Remover pontuação do CPF
+   p_cpf := REPLACE(REPLACE(REPLACE(p_cpf, '.', ''), '-', ''), ' ', '');
+   -- Tentar buscar o ID e a senha associada em cada tabela
+   SELECT id, senha INTO administrador_id, v_senha_db
+   FROM (
+       SELECT id, senha FROM administrador WHERE cpf = p_cpf
+       UNION ALL
+       SELECT id, senha FROM instrutor WHERE cpf = p_cpf
+       UNION ALL
+       SELECT id, senha FROM cliente WHERE cpf = p_cpf
+   ) AS combined_tables
+   LIMIT 1;  -- Limitar a um resultado para evitar múltiplas correspondências
+   -- Se o CPF não for encontrado em nenhuma tabela
+   IF NOT FOUND THEN
+       RAISE EXCEPTION 'CPF não cadastrado';
+   END IF;
+   -- Verificar se a senha está correta
+   IF v_senha_db != p_senha THEN
+       RAISE EXCEPTION 'Senha incorreta';
+   END IF;
+   -- Retornar o ID do cliente e a mensagem de sucesso
+   RETURN QUERY SELECT administrador_id, 'Login realizado com sucesso';
+END;
+$BODY$;
+ALTER FUNCTION public.login(character varying, character varying)
+   OWNER TO postgres;

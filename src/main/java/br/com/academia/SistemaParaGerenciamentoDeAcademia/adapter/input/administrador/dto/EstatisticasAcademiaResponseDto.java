@@ -1,4 +1,4 @@
-package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto;
+package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

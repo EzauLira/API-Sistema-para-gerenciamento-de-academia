@@ -1,13 +1,12 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.AgendamentosDoDiaResponseDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 
 import java.util.List;
 
 public interface IInstrutorRepository {
 
-    void efetuarLoginInstrutor(Instrutor instrutor);
+//    void efetuarLoginInstrutor(Instrutor instrutor);
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 

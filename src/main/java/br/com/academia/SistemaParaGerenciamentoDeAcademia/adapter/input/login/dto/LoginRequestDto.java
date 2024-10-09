@@ -1,4 +1,4 @@
-package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Administrador.dto;
+package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AdministradorRequestDto {
+@NoArgsConstructor
+public class LoginRequestDto {
 
     private String usuario;
+    private String cpf;
     private String senha;
 }

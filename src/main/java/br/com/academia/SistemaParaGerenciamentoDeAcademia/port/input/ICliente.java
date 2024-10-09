@@ -12,7 +12,7 @@ public interface ICliente {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-    void efetuarLogin(ClienteRequestDto clienteRequestDto);
+//    void efetuarLogin(LoginRequestDto loginRequestDto);
 
     //--------------------------------------------------------------------------------------------------------------------//
 

@@ -7,13 +7,12 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agenda
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +24,9 @@ public class ClienteCommand implements ICliente {
 
    @Autowired
    IClienteRepository iClienteRepository;
+
+   @Autowired
+    ILoginRepository iLoginRepository;
 
     //--------------------------------------------------------------------------------------------------------------------//
 
@@ -59,23 +61,18 @@ public class ClienteCommand implements ICliente {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-    @Override
-    public void efetuarLogin(ClienteRequestDto clienteRequestDto){
-        LOGGER.info("Início do método efetuarLogin da command para um cliente.");
-
-        LOGGER.info("Validando as informações do cliente para login.");
-        ValidarCpfUtils.validarCpf(clienteRequestDto.getCpf());
-        ValidarSenhaUtils.validarSenha(clienteRequestDto.getSenha());
-
-        LOGGER.info("Construindo o cliente para login.");
-        Cliente cliente = Cliente.builder()
-                .cpf(clienteRequestDto.getCpf())
-                .senha(clienteRequestDto.getSenha())
-                .build();
-
-        LOGGER.info("Salvando os dados.");
-        iClienteRepository.efetuarLogin(cliente);
-    }
+//    @Override
+//    public void efetuarLogin(LoginRequestDto loginRequestDto){
+//        LOGGER.info("Início do método efetuarLogin da command para um cliente.");
+//
+//        LOGGER.info("Validando as informações do cliente para login.");
+//        ValidarCpfUtils.validarCpf(loginRequestDto.getCpf());
+//        ValidarSenhaUtils.validarSenha(loginRequestDto.getSenha());
+//
+//
+//        LOGGER.info("Salvando os dados.");
+//        iLoginRepository.login(loginRequestDto);
+//    }
 
     //--------------------------------------------------------------------------------------------------------------------//
 
