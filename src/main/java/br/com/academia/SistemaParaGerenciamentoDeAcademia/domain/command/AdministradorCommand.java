@@ -4,6 +4,7 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administ
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.InstrutorRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.IAdministrador;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IAdministradorRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
 import org.slf4j.Logger;
@@ -21,6 +22,9 @@ public class AdministradorCommand implements IAdministrador {
     @Autowired
     IAdministradorRepository iadministradorRepository;
 
+    @Autowired
+    ISegurancaConfig iSegurancaConfig;
+
     //--------------------------------------------------------------------------------------------------------------------//
 
 
@@ -36,6 +40,10 @@ public class AdministradorCommand implements IAdministrador {
         ValidarEmailUtils.validarEmail(instrutorRequestDto.getEmail());
         ValidarSenhaUtils.validarSenha(instrutorRequestDto.getSenha());
 
+
+        LOGGER.info("Criptografando senha do isntrutor - command");
+        String senhaCripto = iSegurancaConfig.criptografarSenha(instrutorRequestDto.getSenha());
+
         LOGGER.info("Construindo o Instrutor - command.");
         Instrutor instrutor = Instrutor.builder()
                 .nome(instrutorRequestDto.getNome())
@@ -43,7 +51,7 @@ public class AdministradorCommand implements IAdministrador {
                 .genero(instrutorRequestDto.getGenero())
                 .telefone(instrutorRequestDto.getTelefone())
                 .email(instrutorRequestDto.getEmail())
-                .senha(instrutorRequestDto.getSenha())
+                .senha(senhaCripto)
                 .build();
 
         LOGGER.info("Salvando o instrutor - command.");
@@ -51,21 +59,6 @@ public class AdministradorCommand implements IAdministrador {
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
-
-
-//    @Override
-//    public void efetuarLogin(AdministradorRequestDto administradorRequestDto){
-//        LOGGER.info("Início do método efetuarLogin da command para um ADM.");
-//
-//        LOGGER.info("Construindo o ADM para login - command.");
-//        Administrador administrador = Administrador.builder()
-//                .usuario(administradorRequestDto.getUsuario())
-//                .senha(administradorRequestDto.getSenha())
-//                .build();
-//
-//        LOGGER.info("Salvando os dados do ADM - command.");
-//       iadministradorRepository.efetuarLogin(administrador);
-//    }
 
     @Override
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia(){

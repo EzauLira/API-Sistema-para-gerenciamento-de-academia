@@ -6,5 +6,9 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Client
 public interface ILoginRepository {
 
     void login(LoginRequestDto loginRequestDto);
+
+    //------------------------------------------------------------------------------------------------------------------------------------//
+
+
     Cliente existePessoa(String cpf);
 }

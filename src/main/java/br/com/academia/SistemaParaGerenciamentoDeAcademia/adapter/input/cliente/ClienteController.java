@@ -6,7 +6,6 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ILogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ public class ClienteController implements IClienteController {
 
     @Autowired
     private ICliente clienteCommand;
-
-    @Autowired
-    ILogin iLogin;
 
     //--------------------------------------------------------------------------------------------------------------------//
 

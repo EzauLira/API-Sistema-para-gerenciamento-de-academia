@@ -5,7 +5,6 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instruto
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemSucessoEnum;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.IAdministrador;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ILogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,6 @@ public class AdministradorController implements IAdministradorController{
 
     @Autowired
     IAdministrador administradorCommand;
-
-    @Autowired
-    ILogin iLogin;
 
     //--------------------------------------------------------------------------------------------------------------------//
 

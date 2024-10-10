@@ -23,28 +23,6 @@ public class InstrutorRepository implements IInstrutorRepository {
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 
-//    @Override
-//    public void efetuarLoginInstrutor(Instrutor instrutor) {
-//        LOGGER.info("Início do método para efetuar login de um instrutor - repository.");
-//        try {
-//            String sql = "SELECT * FROM login_instrutor(?,?)";
-//
-//            jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
-//                preparedStatement.setString(1, instrutor.getCpf());
-//                preparedStatement.setString(2, instrutor.getSenha());
-//                preparedStatement.execute();
-//                return null;
-//            });
-//
-//        } catch (DataAccessException e) {
-//            throw new NegocioException(e.getMostSpecificCause().getMessage());
-//        } catch (Exception e) {
-//            throw new NegocioException("Erro ao logar.");
-//        }
-//    }
-
-    //------------------------------------------------------------------------------------------------------------------------------------//
-
     @Override
     public List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia() {
         LOGGER.info("Início do método para listar agendamentos do dia - repository.");

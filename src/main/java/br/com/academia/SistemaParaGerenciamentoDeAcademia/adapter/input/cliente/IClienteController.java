@@ -3,7 +3,6 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.AgendamentoRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.RespostaPadraoDto;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -21,17 +20,6 @@ public interface IClienteController {
             @ApiResponse(code = 500, message = "Erro interno do servidor")
     })
     ResponseEntity<RespostaPadraoDto> cadastrarNovoCliente(ClienteRequestDto clienteRequestDto);
-
-//--------------------------------------------------------------------------------------------------------------------//
-
-
-//    @Operation(summary = "Login do cliente", description = "Loga um cliente.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Login efetuado com sucesso"),
-//            @ApiResponse(code = 400, message = "Dados de login inválidos"),
-//            @ApiResponse(code = 500, message = "Erro interno do servidor")
-//    })
-//    ResponseEntity<RespostaPadraoDto> efetuarLogin(LoginRequestDto loginRequestDto);
 
 
     //--------------------------------------------------------------------------------------------------------------------//

@@ -45,7 +45,7 @@ public class LoginRepository implements ILoginRepository {
     public Cliente existePessoa(String cpf) {
         LOGGER.info("Início do método para verificar se existe pessoa - repository.");
         try{
-            String sql = "SELECT pessoa_existe(?)";
+            String sql = "SELECT * FROM OBTER_USUARIO_POR_CPF(?)";
 
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Cliente.class), cpf);
 

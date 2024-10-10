@@ -6,6 +6,7 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agendamento;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
@@ -20,13 +21,16 @@ import java.util.List;
 @Service
 public class ClienteCommand implements ICliente {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(ClienteCommand.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClienteCommand.class);
 
-   @Autowired
-   IClienteRepository iClienteRepository;
+    @Autowired
+    IClienteRepository iClienteRepository;
 
-   @Autowired
+    @Autowired
     ILoginRepository iLoginRepository;
+
+    @Autowired
+    ISegurancaConfig iSegurancaConfig;
 
     //--------------------------------------------------------------------------------------------------------------------//
 
@@ -43,6 +47,9 @@ public class ClienteCommand implements ICliente {
         ValidarEmailUtils.validarEmail(clienteRequestDto.getEmail());
         ValidarSenhaUtils.validarSenha(clienteRequestDto.getSenha());
 
+        LOGGER.info("Criptografando senha do isntrutor - command");
+        String senhaCripto = iSegurancaConfig.criptografarSenha(clienteRequestDto.getSenha());
+
         LOGGER.info("Construindo o cliente.");
         Cliente cliente = Cliente.builder()
                 .nome(clienteRequestDto.getNome())
@@ -51,7 +58,7 @@ public class ClienteCommand implements ICliente {
                 .genero(clienteRequestDto.getGenero())
                 .telefone(clienteRequestDto.getTelefone())
                 .email(clienteRequestDto.getEmail())
-                .senha(clienteRequestDto.getSenha())
+                .senha(senhaCripto)
                 .idPlano(clienteRequestDto.getIdPlano())
                 .build();
 
@@ -61,23 +68,8 @@ public class ClienteCommand implements ICliente {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-//    @Override
-//    public void efetuarLogin(LoginRequestDto loginRequestDto){
-//        LOGGER.info("Início do método efetuarLogin da command para um cliente.");
-//
-//        LOGGER.info("Validando as informações do cliente para login.");
-//        ValidarCpfUtils.validarCpf(loginRequestDto.getCpf());
-//        ValidarSenhaUtils.validarSenha(loginRequestDto.getSenha());
-//
-//
-//        LOGGER.info("Salvando os dados.");
-//        iLoginRepository.login(loginRequestDto);
-//    }
-
-    //--------------------------------------------------------------------------------------------------------------------//
-
     @Override
-    public void agendarTreino(AgendamentoRequestDto agendamentoRequestDto){
+    public void agendarTreino(AgendamentoRequestDto agendamentoRequestDto) {
         LOGGER.info("Início do método agendarTreino da command para um cliente.");
 
         LOGGER.info("Construindo o cliente para agendamento de um treino.");
@@ -96,7 +88,7 @@ public class ClienteCommand implements ICliente {
     //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
-    public void atualizarAgendamentoDeTreino(AgendamentoRequestDto agendamentoRequestDto){
+    public void atualizarAgendamentoDeTreino(AgendamentoRequestDto agendamentoRequestDto) {
         LOGGER.info("Início do método ataulizarAgendamentoDeTreino da command para um cliente.");
 
         LOGGER.info("Construindo o dados para atualizar o agendamento de um treino.");
@@ -115,7 +107,7 @@ public class ClienteCommand implements ICliente {
     //--------------------------------------------------------------------------------------------------------------------//
 
     @Override
-    public void excluirAgendamentoAtivo(AgendamentoRequestDto agendamentoRequestDto){
+    public void excluirAgendamentoAtivo(AgendamentoRequestDto agendamentoRequestDto) {
         LOGGER.info("Início do método excluirAgendamentoAtivo da command para um cliente.");
 
         LOGGER.info("Construindo o dados para atualizar o agendamento de um treino.");

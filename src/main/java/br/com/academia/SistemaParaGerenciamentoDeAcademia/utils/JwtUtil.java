@@ -17,9 +17,9 @@ public class JwtUtil {
 
     public static String gerarToken(Cliente cliente) {
         return Jwts.builder()
-                .setSubject(cliente.getEmail())
+                .setSubject(cliente.getCpf())
                 .claim("id", cliente.getIdCliente())
-                .claim("email", cliente.getEmail())
+                .claim("cpf", cliente.getCpf())
                 .claim("tipoUsuario", cliente.getTipoUsuario().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
@@ -36,7 +36,7 @@ public class JwtUtil {
 
         JwtResponseDto jwtResponseDTO = new JwtResponseDto();
         jwtResponseDTO.setId(claims.get("id", Integer.class));
-        jwtResponseDTO.setEmail(claims.get("email", String.class));
+        jwtResponseDTO.setCpf(claims.get("cpf", String.class));
         jwtResponseDTO.setTipoUsuario(TipoUsuarioEnum.valueOf(claims.get("tipoUsuario", String.class)));
 
         return jwtResponseDTO;

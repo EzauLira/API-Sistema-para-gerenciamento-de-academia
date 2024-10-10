@@ -26,7 +26,7 @@ public class LoginController implements ILoginController{
 
     @Override
     @PostMapping("/logar")
-    public ResponseEntity<RespostaPadraoDto> login(@RequestBody LoginRequestDto loginRequestDto) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto) {
         LOGGER.info("Inicio do método para efetuar login - Controller");
 
         long startTime = System.currentTimeMillis();

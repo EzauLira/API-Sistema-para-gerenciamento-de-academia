@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface IInstrutor {
 
-//    void efetuarLoginInstrutor(LoginRequestDto loginRequestDto);
-
     //------------------------------------------------------------------------------------------------------------------------------------//
 
     List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia();

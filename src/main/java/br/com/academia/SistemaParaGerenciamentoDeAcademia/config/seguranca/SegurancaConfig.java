@@ -1,4 +1,4 @@
-package br.com.academia.SistemaParaGerenciamentoDeAcademia.config;
+package br.com.academia.SistemaParaGerenciamentoDeAcademia.config.seguranca;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
