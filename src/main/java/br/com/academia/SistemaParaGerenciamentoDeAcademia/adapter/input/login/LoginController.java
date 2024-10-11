@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/login")
 public class LoginController implements ILoginController{
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired

@@ -42,8 +42,6 @@ public class LoginCommand implements ILogin {
             return iSegurancaConfig.gerarToken(cliente);
         }
 
-        iLoginRepository.login(loginRequestDto);
-
         throw new NegocioException(MensagemExcecaoEnum.ERRO_AUTENTICAR.getMensagem());
     }
 }

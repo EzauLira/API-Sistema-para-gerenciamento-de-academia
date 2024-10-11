@@ -54,29 +54,6 @@ public class ClienteRepository implements IClienteRepository {
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-//    @Override
-//    public void efetuarLogin(Cliente cliente) {
-//        LOGGER.info("Início do método para efetuar login de um cliente - repository.");
-//        try {
-//            String sql = "SELECT * FROM login_cliente(?,?)";
-//
-//            jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
-//                preparedStatement.setString(1, cliente.getCpf());
-//                preparedStatement.setString(2, cliente.getSenha());
-//                preparedStatement.execute();
-//                return null;
-//            });
-//        } catch (DataAccessException e) {
-//            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-//            throw new NegocioException(e.getMostSpecificCause().getMessage());
-//        } catch (Exception e) {
-//            LOGGER.error("Exception: {}", e.getMessage(), e);
-//            throw new NegocioException("Erro ao logar cliente.");
-//        }
-//    }
-
-    //--------------------------------------------------------------------------------------------------------------------//
-
     @Override
     public void agendarTreino(Agendamento agendamento){
         LOGGER.info("Início do método para agendamento de um treino - repository.");

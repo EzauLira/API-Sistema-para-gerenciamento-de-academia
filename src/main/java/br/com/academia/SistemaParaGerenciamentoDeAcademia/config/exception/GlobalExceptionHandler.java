@@ -19,12 +19,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErroRespostaDto> handleNegocioException(NegocioException e) {
         LOGGER.error("NegocioException: {}", e.getMessage(), e);
 
-        if (e instanceof CpfException
-           || e instanceof SenhaException
-           || e instanceof EmailException
-           || e instanceof IdadeException
-           || e instanceof NomeException
-           || e instanceof TelefoneException) {
+        if (e instanceof NegocioException) {
 
             ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
             return new ResponseEntity<>(erroRespostaDto, HttpStatus.BAD_REQUEST);

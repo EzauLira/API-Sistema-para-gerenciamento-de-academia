@@ -25,10 +25,6 @@ public class ClienteCommand implements ICliente {
 
     @Autowired
     IClienteRepository iClienteRepository;
-
-    @Autowired
-    ILoginRepository iLoginRepository;
-
     @Autowired
     ISegurancaConfig iSegurancaConfig;
 
