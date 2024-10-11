@@ -13,7 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/instrutor")
-public class InstrutorController implements IInstrutorController {
+public class
+InstrutorController implements IInstrutorController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InstrutorController.class);
 

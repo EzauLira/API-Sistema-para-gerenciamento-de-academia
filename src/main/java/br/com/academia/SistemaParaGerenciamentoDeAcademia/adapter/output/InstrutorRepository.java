@@ -4,6 +4,7 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instruto
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IInstrutorRepository;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -39,9 +40,11 @@ public class InstrutorRepository implements IInstrutorRepository {
             });
 
         } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException("Erro ao listar agendamento do dia.");
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new NegocioException(ConstantesUtils.ERRO_AO_LISTAR_AGENDAMENTO_DO_DIA);
         }
     }
 
@@ -63,7 +66,7 @@ public class InstrutorRepository implements IInstrutorRepository {
         } catch (DataAccessException e) {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException("Erro ao listar treino de um cliente específico.");
+            throw new NegocioException(ConstantesUtils.ERRO_AO_LISTAR_TREINO_CLIENTE_ESPECIFICO);
         }
     }
 
@@ -85,7 +88,7 @@ public class InstrutorRepository implements IInstrutorRepository {
         } catch (DataAccessException e) {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException("Erro ao listar todos os treinos de um cliente.");
+            throw new NegocioException(ConstantesUtils.ERRO_AO_LISTAR_TODOS_TREINOS_CLIENTE);
         }
     }
 

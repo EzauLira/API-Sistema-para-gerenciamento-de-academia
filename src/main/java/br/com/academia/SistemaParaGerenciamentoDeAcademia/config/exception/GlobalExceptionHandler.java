@@ -21,7 +21,6 @@ public class GlobalExceptionHandler {
 
             ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
             return new ResponseEntity<>(erroRespostaDto, HttpStatus.BAD_REQUEST);
-
     }
 
 
@@ -38,5 +37,14 @@ public class GlobalExceptionHandler {
         } else {
             return new ResponseEntity<>(erroResposta, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErroRespostaDto> handleException(Exception e) {
+        LOGGER.error("Exeception: {}", e.getMessage(), e);
+
+        ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
+        return new ResponseEntity<>(erroRespostaDto, HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 }

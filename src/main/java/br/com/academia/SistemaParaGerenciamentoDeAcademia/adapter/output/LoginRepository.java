@@ -5,6 +5,7 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Client
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class LoginRepository implements ILoginRepository {
         } catch (DataAccessException e) {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException("Erro ao logar.");
+            throw new NegocioException(ConstantesUtils.ERRO_AO_LOGAR);
         }
     }
 
@@ -53,7 +54,7 @@ public class LoginRepository implements ILoginRepository {
         } catch (DataAccessException e) {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException("Erro ao verificar pessoa.");
+            throw new NegocioException(ConstantesUtils.ERRO_VERIFICAR_PESSOA);
         }
     }
 }

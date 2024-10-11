@@ -5,6 +5,7 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instru
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IAdministradorRepository;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException("Erro ao cadastrar cliente.");
+            throw new NegocioException(ConstantesUtils.ERRO_AO_CADASTRAR_INSTRUTOR);
         }
     }
 
@@ -73,7 +74,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException("Erro ao agendar treino.");
+            throw new NegocioException(ConstantesUtils.ERRO_AO_LISTAR_ESTATISTICAS);
         }
     }
 

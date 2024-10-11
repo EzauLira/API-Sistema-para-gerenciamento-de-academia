@@ -54,7 +54,7 @@ public class SistemaControleFiltro extends OncePerRequestFilter {
                     TipoUsuarioEnum tipoUsuarioEnum = jwtRespostaDTO.getTipoUsuario();
 
                     if (!ehRoleAutorizado(requisicao, tipoUsuarioEnum)) {
-                        envioForbiddenResposta(resposta, requisicao);
+                        envioErroAcessoARotaResposta(resposta, requisicao);
                         return;
                     }
 
@@ -106,7 +106,7 @@ public class SistemaControleFiltro extends OncePerRequestFilter {
         resposta.getWriter().write(objectMapper.writeValueAsString(erroResposta));
     }
 
-    private void envioForbiddenResposta(HttpServletResponse resposta, HttpServletRequest requisicao) throws IOException {
+    private void envioErroAcessoARotaResposta(HttpServletResponse resposta, HttpServletRequest requisicao) throws IOException {
         resposta.setStatus(HttpStatus.FORBIDDEN.value());
         resposta.setContentType(MediaType.APPLICATION_JSON_VALUE);
         ErroAutenticacaoRespostaDTO erroResposta = ErroResposta

@@ -11,7 +11,6 @@ public class SegurancaConfig implements ISegurancaConfig {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
     @Override
     public String criptografarSenha(String senha) {
         return passwordEncoder.encode(senha);
