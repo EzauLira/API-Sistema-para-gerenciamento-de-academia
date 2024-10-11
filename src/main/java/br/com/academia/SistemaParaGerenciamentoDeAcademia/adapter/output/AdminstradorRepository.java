@@ -2,6 +2,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IAdministradorRepository;
 import org.slf4j.Logger;
@@ -42,36 +43,12 @@ public class AdminstradorRepository implements IAdministradorRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao cadastrar cliente.");
         }
     }
-
-    //--------------------------------------------------------------------------------------------------------------------//
-
-
-//    @Override
-//    public void efetuarLogin(Administrador administrador) {
-//        LOGGER.info("Início do método para efetuar login de um ADM - repository.");
-//        try {
-//            String sql = "SELECT * FROM login_admin(?,?)";
-//
-//            jdbcTemplate.execute(sql, (PreparedStatementCallback<Void>) preparedStatement -> {
-//                preparedStatement.setString(1, administrador.getUsuario());
-//                preparedStatement.setString(2, administrador.getSenha());
-//                preparedStatement.execute();
-//                return null;
-//            });
-//        } catch (DataAccessException e) {
-//            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-//            throw new NegocioException(e.getMostSpecificCause().getMessage());
-//        } catch (Exception e) {
-//            LOGGER.error("Exception: {}", e.getMessage(), e);
-//            throw new NegocioException("Erro ao logar cliente.");
-//        }
-//    }
 
     //--------------------------------------------------------------------------------------------------------------------//
 
@@ -93,14 +70,12 @@ public class AdminstradorRepository implements IAdministradorRepository {
 
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao agendar treino.");
         }
     }
 
-
     //--------------------------------------------------------------------------------------------------------------------//
-
 }

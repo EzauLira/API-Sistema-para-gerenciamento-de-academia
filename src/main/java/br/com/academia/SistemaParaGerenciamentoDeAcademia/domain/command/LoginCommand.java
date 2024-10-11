@@ -20,10 +20,10 @@ public class LoginCommand implements ILogin {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginCommand.class);
 
     @Autowired
-    ILoginRepository iLoginRepository;
+    ILoginRepository loginRepository;
 
     @Autowired
-    ISegurancaConfig iSegurancaConfig;
+    ISegurancaConfig segurancaConfig;
 
     @Override
     public String login(LoginRequestDto loginRequestDto) {
@@ -35,11 +35,11 @@ public class LoginCommand implements ILogin {
         ValidarSenhaUtils.validarSenha(loginRequestDto.getSenha());
 
         LOGGER.info("Verificando se a pessoa existe na base de dados - command");
-        Cliente cliente = iLoginRepository.existePessoa(loginRequestDto.getCpf());
+        Cliente cliente = loginRepository.existePessoa(loginRequestDto.getCpf());
 
         LOGGER.info("Autenticando o usuario");
-        if (iSegurancaConfig.compararSenhaHash(loginRequestDto.getSenha(), cliente.getSenha())) {
-            return iSegurancaConfig.gerarToken(cliente);
+        if (segurancaConfig.compararSenhaHash(loginRequestDto.getSenha(), cliente.getSenha())) {
+            return segurancaConfig.gerarToken(cliente);
         }
 
         throw new NegocioException(MensagemExcecaoEnum.ERRO_AUTENTICAR.getMensagem());

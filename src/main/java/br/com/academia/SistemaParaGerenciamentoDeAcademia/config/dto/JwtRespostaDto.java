@@ -1,5 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto;
 
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorAutenticacaoResponseDTO {
+public class JwtRespostaDto {
 
-    private String mensagem;
-    private String path;
-    private Integer code;
+    private int id;
+    private String cpf;
+    private String senha;
+    private TipoUsuarioEnum tipoUsuario;
 }

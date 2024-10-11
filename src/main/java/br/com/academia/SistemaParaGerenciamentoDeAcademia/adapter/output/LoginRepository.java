@@ -2,6 +2,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class LoginRepository implements ILoginRepository {
             });
 
         } catch (DataAccessException e) {
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             throw new NegocioException("Erro ao logar.");
         }
@@ -50,10 +51,9 @@ public class LoginRepository implements ILoginRepository {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Cliente.class), cpf);
 
         } catch (DataAccessException e) {
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             throw new NegocioException("Erro ao verificar pessoa.");
         }
-
     }
 }

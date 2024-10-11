@@ -44,27 +44,6 @@ public class AdministradorController implements IAdministradorController{
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-//    @Override
-//    @PostMapping("/logar")
-//    public ResponseEntity<RespostaPadraoDto> efetuarLogin(@RequestBody LoginRequestDto loginRequestDto) {
-//        LOGGER.info("Inicio do método para efetuar login - Controller");
-//
-//        long startTime = System.currentTimeMillis();
-//
-//        iLogin.login(loginRequestDto);
-//
-//        long endTime = System.currentTimeMillis();
-//        long elapsedTime = endTime - startTime;
-//        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
-//
-//        return ResponseEntity.ok(
-//                RespostaPadraoDto.builder()
-//                        .mensagem(MensagemSucessoEnum.LOGIN_ADM_EFETUADO.getMensagem())
-//                        .build());
-//    }
-
-    //--------------------------------------------------------------------------------------------------------------------//
-
     @Override
     @GetMapping("/buscar-estatistica")
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia() {

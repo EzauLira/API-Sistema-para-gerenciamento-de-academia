@@ -24,9 +24,9 @@ public class ClienteCommand implements ICliente {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClienteCommand.class);
 
     @Autowired
-    IClienteRepository iClienteRepository;
+    IClienteRepository clienteRepository;
     @Autowired
-    ISegurancaConfig iSegurancaConfig;
+    ISegurancaConfig segurancaConfig;
 
     //--------------------------------------------------------------------------------------------------------------------//
 
@@ -44,7 +44,7 @@ public class ClienteCommand implements ICliente {
         ValidarSenhaUtils.validarSenha(clienteRequestDto.getSenha());
 
         LOGGER.info("Criptografando senha do isntrutor - command");
-        String senhaCripto = iSegurancaConfig.criptografarSenha(clienteRequestDto.getSenha());
+        String senhaCripto = segurancaConfig.criptografarSenha(clienteRequestDto.getSenha());
 
         LOGGER.info("Construindo o cliente.");
         Cliente cliente = Cliente.builder()
@@ -59,7 +59,7 @@ public class ClienteCommand implements ICliente {
                 .build();
 
         LOGGER.info("Salvando o cliente.");
-        iClienteRepository.cadastrarNovoCliente(cliente);
+        clienteRepository.cadastrarNovoCliente(cliente);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
@@ -78,7 +78,7 @@ public class ClienteCommand implements ICliente {
                 .build();
 
         LOGGER.info("Salvando os dados.");
-        iClienteRepository.agendarTreino(agendamento);
+        clienteRepository.agendarTreino(agendamento);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
@@ -97,7 +97,7 @@ public class ClienteCommand implements ICliente {
                 .build();
 
         LOGGER.info("Salvando os dados.");
-        iClienteRepository.atualizarAgendamentoDeTreino(agendamento);
+        clienteRepository.atualizarAgendamentoDeTreino(agendamento);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
@@ -112,7 +112,7 @@ public class ClienteCommand implements ICliente {
                 .build();
 
         LOGGER.info("Salvando os dados.");
-        iClienteRepository.excluirAgendamentoAtivo(agendamento);
+        clienteRepository.excluirAgendamentoAtivo(agendamento);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
@@ -120,7 +120,7 @@ public class ClienteCommand implements ICliente {
     @Override
     public List<ClienteResponseDto> buscarClientePorNome(String primeiroNome) {
         LOGGER.info("Início do método buscarClientePorNome da command para um cliente.");
-        return iClienteRepository.buscarDadosPessoaisPeloPrimeiroNome(primeiroNome);
+        return clienteRepository.buscarDadosPessoaisPeloPrimeiroNome(primeiroNome);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//

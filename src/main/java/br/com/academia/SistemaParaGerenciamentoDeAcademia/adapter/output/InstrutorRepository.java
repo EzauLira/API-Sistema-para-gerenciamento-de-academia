@@ -1,6 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.AgendamentosDoDiaResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IInstrutorRepository;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class InstrutorRepository implements IInstrutorRepository {
             });
 
         } catch (DataAccessException e) {
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             throw new NegocioException("Erro ao listar agendamento do dia.");
         }
@@ -60,7 +61,7 @@ public class InstrutorRepository implements IInstrutorRepository {
                 return agendamento;
             });
         } catch (DataAccessException e) {
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             throw new NegocioException("Erro ao listar treino de um cliente específico.");
         }
@@ -82,7 +83,7 @@ public class InstrutorRepository implements IInstrutorRepository {
                 return agendamento;
             });
         } catch (DataAccessException e) {
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             throw new NegocioException("Erro ao listar todos os treinos de um cliente.");
         }

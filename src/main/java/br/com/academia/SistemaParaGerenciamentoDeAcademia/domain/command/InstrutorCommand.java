@@ -15,7 +15,7 @@ public class InstrutorCommand implements IInstrutor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InstrutorCommand.class);
     @Autowired
-    IInstrutorRepository iInstrutorRepository;
+    IInstrutorRepository instrutorRepository;
 
 
     //------------------------------------------------------------------------------------------------------------------------------------//
@@ -23,7 +23,7 @@ public class InstrutorCommand implements IInstrutor {
     @Override
     public List<AgendamentosDoDiaResponseDto> listarAgendamentoDoDia(){
         LOGGER.info("Início do método listarAgendamentoDoDia da command para instrutor.");
-       return iInstrutorRepository.listarAgendamentoDoDia();
+       return instrutorRepository.listarAgendamentoDoDia();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
@@ -31,7 +31,7 @@ public class InstrutorCommand implements IInstrutor {
     @Override
     public List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome) {
         LOGGER.info("Início do método listarTreinosDeUmClienteEspecifico da command para instrutor.");
-        return iInstrutorRepository.listarTreinosDeUmClienteEspecifico(nome);
+        return instrutorRepository.listarTreinosDeUmClienteEspecifico(nome);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
@@ -39,7 +39,7 @@ public class InstrutorCommand implements IInstrutor {
     @Override
     public List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome) {
         LOGGER.info("Início do método buscarHistoricoDeUmClienteEspecifico da command para instrutor.");
-        return iInstrutorRepository.buscarHistoricoDeUmClienteEspecifico(nome);
+        return instrutorRepository.buscarHistoricoDeUmClienteEspecifico(nome);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------//

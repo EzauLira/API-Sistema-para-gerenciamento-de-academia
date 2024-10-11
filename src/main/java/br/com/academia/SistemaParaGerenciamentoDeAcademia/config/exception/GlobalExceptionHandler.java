@@ -19,11 +19,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErroRespostaDto> handleNegocioException(NegocioException e) {
         LOGGER.error("NegocioException: {}", e.getMessage(), e);
 
-        if (e instanceof NegocioException) {
-
             ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
             return new ResponseEntity<>(erroRespostaDto, HttpStatus.BAD_REQUEST);
-        }
+
+    }
+
+
+    @ExceptionHandler(NegocioBancoException.class)
+    public ResponseEntity<ErroRespostaDto> handleNegocioBancoException(NegocioBancoException e) {
+        LOGGER.error("NegocioBancoException: {}", e.getMessage(), e);
 
         String erroDoBanco = e.getMessage();
         ErroBancoDadosEnum erroBancoDadosEnum = ErroBancoDadosEnum.mensagemDoBanco(erroDoBanco);

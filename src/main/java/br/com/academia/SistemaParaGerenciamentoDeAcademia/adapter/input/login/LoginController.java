@@ -38,7 +38,8 @@ public class LoginController implements ILoginController{
 
         return ResponseEntity.ok(
                 RespostaPadraoDto.builder()
-                        .mensagem(MensagemSucessoEnum.LOGIN_EFETUADO.getMensagem()).dados(tokenResponseDto)
+                        .mensagem(MensagemSucessoEnum.LOGIN_EFETUADO.getMensagem())
+                        .dados(tokenResponseDto)
                         .build());
     }
 }

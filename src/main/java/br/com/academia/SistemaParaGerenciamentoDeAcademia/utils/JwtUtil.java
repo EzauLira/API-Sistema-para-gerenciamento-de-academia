@@ -1,6 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.utils;
 
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.JwtResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.config.dto.JwtRespostaDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.TipoUsuarioEnum;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,18 +27,18 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static JwtResponseDto decodificarToken(String token) {
+    public static JwtRespostaDto decodificarToken(String token) {
         Jws<Claims> jws = Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()
                 .parseClaimsJws(token);
         Claims claims = jws.getBody();
 
-        JwtResponseDto jwtResponseDTO = new JwtResponseDto();
-        jwtResponseDTO.setId(claims.get("id", Integer.class));
-        jwtResponseDTO.setCpf(claims.get("cpf", String.class));
-        jwtResponseDTO.setTipoUsuario(TipoUsuarioEnum.valueOf(claims.get("tipoUsuario", String.class)));
+        JwtRespostaDto jwtRespostaDTO = new JwtRespostaDto();
+        jwtRespostaDTO.setId(claims.get("id", Integer.class));
+        jwtRespostaDTO.setCpf(claims.get("cpf", String.class));
+        jwtRespostaDTO.setTipoUsuario(TipoUsuarioEnum.valueOf(claims.get("tipoUsuario", String.class)));
 
-        return jwtResponseDTO;
+        return jwtRespostaDTO;
     }
 }

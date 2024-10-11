@@ -43,26 +43,6 @@ public class ClienteController implements IClienteController {
                         .build());
     }
 
-    //--------------------------------------------------------------------------------------------------------------------//
-
-//    @Override
-//    @PostMapping("/logar")
-//    public ResponseEntity<RespostaPadraoDto> efetuarLogin(@RequestBody LoginRequestDto loginRequestDto) {
-//        LOGGER.info("Inicio do método para efetuar login - Controller");
-//
-//        long startTime = System.currentTimeMillis();
-//
-//        iLogin.login(loginRequestDto);
-//
-//        long endTime = System.currentTimeMillis();
-//        long elapsedTime = endTime - startTime;
-//        LOGGER.info("Tempo decorrido: {} milissegundos", elapsedTime);
-//
-//        return ResponseEntity.ok(
-//                RespostaPadraoDto.builder()
-//                        .mensagem(MensagemSucessoEnum.LOGIN_CLIENTE_EFETUADO.getMensagem())
-//                        .build());
-//    }
 
     //--------------------------------------------------------------------------------------------------------------------//
 

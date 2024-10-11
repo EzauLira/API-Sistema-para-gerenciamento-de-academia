@@ -3,6 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agendamento;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class ClienteRepository implements IClienteRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao cadastrar cliente.");
@@ -70,7 +71,7 @@ public class ClienteRepository implements IClienteRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao agendar treino.");
@@ -95,7 +96,7 @@ public class ClienteRepository implements IClienteRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao agendar treino.");
@@ -117,7 +118,7 @@ public class ClienteRepository implements IClienteRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao agendar treino.");
@@ -144,7 +145,7 @@ public class ClienteRepository implements IClienteRepository {
             });
         } catch (DataAccessException e) {
             LOGGER.error("DataAccessException: {}", e.getMessage(), e);
-            throw new NegocioException(e.getMostSpecificCause().getMessage());
+            throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
             throw new NegocioException("Erro ao agendar treino.");

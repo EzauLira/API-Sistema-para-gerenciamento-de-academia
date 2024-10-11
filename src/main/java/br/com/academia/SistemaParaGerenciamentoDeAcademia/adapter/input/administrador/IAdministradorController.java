@@ -15,19 +15,6 @@ public interface IAdministradorController{
 
     //--------------------------------------------------------------------------------------------------------------------//
 
-
-//    @Operation(summary = "Login do ADM", description = "Loga um ADM.")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Login efetuado com sucesso"),
-//            @ApiResponse(code = 400, message = "Dados de login inválidos"),
-//            @ApiResponse(code = 500, message = "Erro interno do servidor")
-//    })
-//    ResponseEntity<RespostaPadraoDto> efetuarLogin(LoginRequestDto loginRequestDto);
-
-
-    //--------------------------------------------------------------------------------------------------------------------//
-
-
     @Operation(summary = "Cadastrar instrutor", description = "Cadastra um novo instrutor.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Cadastro efetuado com sucesso"),

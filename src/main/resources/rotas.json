@@ -8,7 +8,7 @@
     "roles": ["ADMINISTRADOR"]
   },
   {
-    "path": "/v1/admin/buscar-estatistica",
+    "path": "/v1/adm/buscar-estatistica",
     "roles": ["ADMINISTRADOR"]
   },
   {

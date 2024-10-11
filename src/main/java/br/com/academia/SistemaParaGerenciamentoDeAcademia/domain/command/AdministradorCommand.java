@@ -20,10 +20,10 @@ public class AdministradorCommand implements IAdministrador {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdministradorCommand.class);
 
     @Autowired
-    IAdministradorRepository iadministradorRepository;
+    IAdministradorRepository administradorRepository;
 
     @Autowired
-    ISegurancaConfig iSegurancaConfig;
+    ISegurancaConfig segurancaConfig;
 
     //--------------------------------------------------------------------------------------------------------------------//
 
@@ -42,7 +42,7 @@ public class AdministradorCommand implements IAdministrador {
 
 
         LOGGER.info("Criptografando senha do isntrutor - command");
-        String senhaCripto = iSegurancaConfig.criptografarSenha(instrutorRequestDto.getSenha());
+        String senhaCripto = segurancaConfig.criptografarSenha(instrutorRequestDto.getSenha());
 
         LOGGER.info("Construindo o Instrutor - command.");
         Instrutor instrutor = Instrutor.builder()
@@ -55,7 +55,7 @@ public class AdministradorCommand implements IAdministrador {
                 .build();
 
         LOGGER.info("Salvando o instrutor - command.");
-        iadministradorRepository.cadastrarNovoInstrutor(instrutor);
+        administradorRepository.cadastrarNovoInstrutor(instrutor);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
@@ -63,7 +63,7 @@ public class AdministradorCommand implements IAdministrador {
     @Override
     public List<EstatisticasAcademiaResponseDto> listarEstatisticasDaAcademia(){
         LOGGER.info("Início do método listarEstatisticasDaAcademia da command para um ADM");
-        return iadministradorRepository.listarEstatisticasDaAcademia();
+        return administradorRepository.listarEstatisticasDaAcademia();
     }
 
     //--------------------------------------------------------------------------------------------------------------------//
