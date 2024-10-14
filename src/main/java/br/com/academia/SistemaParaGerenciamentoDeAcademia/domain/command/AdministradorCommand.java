@@ -21,7 +21,6 @@ public class AdministradorCommand implements IAdministrador {
 
     @Autowired
     IAdministradorRepository administradorRepository;
-
     @Autowired
     ISegurancaConfig segurancaConfig;
 

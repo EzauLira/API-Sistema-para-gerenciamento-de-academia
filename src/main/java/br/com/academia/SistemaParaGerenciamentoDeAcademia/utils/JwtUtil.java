@@ -13,7 +13,8 @@ import java.security.Key;
 import java.util.Date;
 
 public class JwtUtil {
-    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);;
+
+    private static final Key SenhaSecreta = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public static String gerarToken(Cliente cliente) {
         return Jwts.builder()
@@ -23,13 +24,13 @@ public class JwtUtil {
                 .claim("tipoUsuario", cliente.getTipoUsuario().name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS256, SenhaSecreta)
                 .compact();
     }
 
     public static JwtRespostaDto decodificarToken(String token) {
         Jws<Claims> jws = Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(SenhaSecreta)
                 .build()
                 .parseClaimsJws(token);
         Claims claims = jws.getBody();

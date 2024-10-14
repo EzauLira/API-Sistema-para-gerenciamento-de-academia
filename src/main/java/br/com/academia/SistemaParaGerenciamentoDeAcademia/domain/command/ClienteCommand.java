@@ -8,7 +8,6 @@ import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Client
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
