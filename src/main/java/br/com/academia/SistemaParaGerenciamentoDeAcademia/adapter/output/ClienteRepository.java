@@ -132,7 +132,7 @@ public class ClienteRepository implements IClienteRepository {
     public List<ClienteResponseDto> buscarDadosPessoaisPeloPrimeiroNome(String primeiroNome) {
         LOGGER.info("Início do método para buscar dados pessoais pelo primeiro nome - repository.");
         try {
-            String sql = "SELECT * FROM public.buscar_dados_pessoais_pelo_primeiro_nome(?)";
+            String sql = "SELECT * FROM buscar_dados_pessoais_pelo_primeiro_nome(?)";
 
             return jdbcTemplate.query(sql, new Object[]{primeiroNome}, (rs, rowNum) -> {
                 ClienteResponseDto cliente = new ClienteResponseDto();
@@ -140,7 +140,7 @@ public class ClienteRepository implements IClienteRepository {
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setTelefone(rs.getString("telefone"));
                 cliente.setEmail(rs.getString("email"));
-                cliente.setSenha(rs.getString("senha"));
+                //cliente.setSenha(rs.getString("senha"));
                 cliente.setPlanoNome(rs.getString("plano_nome"));
                 return cliente;
             });

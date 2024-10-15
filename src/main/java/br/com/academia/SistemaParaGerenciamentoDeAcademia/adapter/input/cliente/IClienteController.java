@@ -64,7 +64,7 @@ public interface IClienteController {
             @ApiResponse(code = 400, message = "Dados do cliente inválidos"),
             @ApiResponse(code = 500, message = "Erro interno do servidor")
     })
-    List<ClienteResponseDto> buscarPorNome(ClienteRequestDto clienteRequestDto);
+    List<ClienteResponseDto> buscarPorNome(String nome);
 
 
 }

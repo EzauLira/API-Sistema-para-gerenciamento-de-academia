@@ -28,7 +28,7 @@ public interface IInstrutorController {
             @ApiResponse(code = 400, message = "Dados inválidos"),
             @ApiResponse(code = 500, message = "Erro interno do servidor")
     })
-    List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(ClienteRequestDto clienteRequestDto);
+    List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(String nome);
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 
@@ -38,5 +38,5 @@ public interface IInstrutorController {
             @ApiResponse(code = 400, message = "Dados para busca inválidos"),
             @ApiResponse(code = 500, message = "Erro interno do servidor")
     })
-    List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(ClienteRequestDto clienteRequestDto);
+    List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(String nome);
 }

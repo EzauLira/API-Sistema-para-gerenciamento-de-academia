@@ -110,9 +110,9 @@ public class ClienteController implements IClienteController {
 
     @Override
     @GetMapping("/buscar")
-    public List<ClienteResponseDto> buscarPorNome(@RequestBody ClienteRequestDto clienteRequestDto) {
+    public List<ClienteResponseDto> buscarPorNome(@RequestParam String nome) {
         LOGGER.info("Início do método para buscar um cliente pelo nome - Controller");
-        return clienteCommand.buscarClientePorNome(clienteRequestDto.getNome());
+        return clienteCommand.buscarClientePorNome(nome);
     }
 
     //--------------------------------------------------------------------------------------------------------------------//

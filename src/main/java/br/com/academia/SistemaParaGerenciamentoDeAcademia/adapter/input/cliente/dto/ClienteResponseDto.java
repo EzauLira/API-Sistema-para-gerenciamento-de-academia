@@ -16,6 +16,6 @@ public class ClienteResponseDto {
     private String cpf;
     private String telefone;
     private String email;
-    private String senha;
+    //private String senha;
     private String planoNome;
 }

@@ -34,18 +34,18 @@ InstrutorController implements IInstrutorController {
 
     @Override
     @GetMapping("/agendamento-especifico")
-    public List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(@RequestBody ClienteRequestDto clienteRequestDto) {
+    public List<AgendamentosDoDiaResponseDto> listarTreinosDeUmClienteEspecifico(@RequestParam String nome) {
         LOGGER.info("Inicio do método para listar treinos de um cliente específico - Controller");
-        return instrutorCommand.listarTreinosDeUmClienteEspecifico(clienteRequestDto.getNome());
+        return instrutorCommand.listarTreinosDeUmClienteEspecifico(nome);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
 
     @Override
     @GetMapping("/historico")
-    public List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(@RequestBody ClienteRequestDto clienteRequestDto) {
+    public List<AgendamentosDoDiaResponseDto> buscarHistoricoDeUmClienteEspecifico(@RequestParam String nome) {
         LOGGER.info("Inicio do método para buscar histórico de um cliente específico - Controller");
-        return instrutorCommand.buscarHistoricoDeUmClienteEspecifico(clienteRequestDto.getNome());
+        return instrutorCommand.buscarHistoricoDeUmClienteEspecifico(nome);
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------//
