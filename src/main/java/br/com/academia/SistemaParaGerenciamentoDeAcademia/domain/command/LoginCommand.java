@@ -3,7 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemExcecaoEnum;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ILogin;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ISegurancaConfig;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
@@ -42,6 +42,6 @@ public class LoginCommand implements ILogin {
             return segurancaConfig.gerarToken(cliente);
         }
 
-        throw new NegocioBancoException(MensagemExcecaoEnum.ERRO_AUTENTICAR.getMensagem());
+        throw new NegocioException(MensagemExcecaoEnum.ERRO_AUTENTICAR.getMensagem());
     }
 }

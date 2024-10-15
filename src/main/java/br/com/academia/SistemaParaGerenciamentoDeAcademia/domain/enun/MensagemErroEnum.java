@@ -6,8 +6,6 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun;
  */
 public enum MensagemErroEnum {
 
-    OPCAO_INVALIDA("Opção inválida! Digite uma opção válida."),
-    CLIENTE_JA_EXISTE("Cliente já existe no banco de dados"),
     IDADE_INVALIDA("A idade precisa ser maior que 15 ano e menor que 150."),
     EMAIL_INVALIDO("Necessário que contenho um email valido."),
     HORA_INVALIDA("A hora precisa ser futuras."),

@@ -13,7 +13,7 @@ public enum ErroBancoDadosEnum {
     FORA_DAS_TRES_OPCOES_DE_TREINO("Treino inválido. Deve ser 1, 2 ou 3.", "Treino escolhido inválido: Deve ser umas das opções validas: (1, 2, 3)."),
     HORA_INVALIDA("valor do campo date/time está fora do intervalo:", "Horário inválido. Por favor, informe um horário válido."),
     JA_EXISTE_TREINO("Já existe um treino agendado", "Já existe um treino agendado para este cliente nesta data e hora. Deve haver pelo menos 30 minutos de diferença entre os treinos."),
-    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor reveja o nome digitado, Caso não lembre do nome cliente vá em BUSCAR DADOS."),
+    CLIENTE_NAO_ENCONTRADO("Cliente não encontrado", "Cliente não encontrado. Por favor insira o nome e o sobrenome."),
     ERRO_CLIENTE_NAO_ENCONTRADO("Cliente não encontrado.", "Cliente não encontrado. Por favor reveja o nome digitado."),
     NOME_JA_CADASTRADO("Erro: Nome já cadastrado.", "Nome já está cadastrado."),
     CPF_JA_CADASTRADO("Erro: CPF já cadastrado.", "CPF já está cadastrado."),

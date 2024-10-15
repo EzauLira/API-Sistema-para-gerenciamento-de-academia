@@ -14,6 +14,5 @@ public class JwtRespostaDto {
 
     private int id;
     private String cpf;
-    private String senha;
     private TipoUsuarioEnum tipoUsuario;
 }

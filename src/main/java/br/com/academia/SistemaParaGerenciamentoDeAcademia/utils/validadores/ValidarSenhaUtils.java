@@ -1,6 +1,7 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.validadores;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.enun.MensagemExcecaoEnum;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.SenhaException;
 
 public class ValidarSenhaUtils {
@@ -18,15 +19,15 @@ public class ValidarSenhaUtils {
         }
 
         if (!senha.matches(".*[A-Z].*")) {
-            throw new SenhaException("A senha deve conter pelo menos uma letra maiúscula.");
+            throw new SenhaException(MensagemExcecaoEnum.SENHA_INVALIDA_LETRAMAIUSCULA.getMensagem());
         }
 
         if (!senha.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
-            throw new SenhaException("A senha deve conter pelo menos um caractere especial.");
+            throw new SenhaException(MensagemExcecaoEnum.SENHA_INVALIDA_CARACTER_ESPECIAL.getMensagem());
         }
 
         if (!senha.matches(".*[0-9].*")) {
-            throw new SenhaException("A senha deve conter pelo menos um número.");
+            throw new SenhaException(MensagemExcecaoEnum.SENHA_INVALIDA_CONTER_NUMERO.getMensagem());
         }
     }
 }

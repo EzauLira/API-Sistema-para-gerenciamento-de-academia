@@ -23,7 +23,6 @@ public class GlobalExceptionHandler {
             return new ResponseEntity<>(erroRespostaDto, HttpStatus.BAD_REQUEST);
     }
 
-
     @ExceptionHandler(NegocioBancoException.class)
     public ResponseEntity<ErroRespostaDto> handleNegocioBancoException(NegocioBancoException e) {
         LOGGER.error("NegocioBancoException: {}", e.getMessage(), e);
@@ -45,6 +44,5 @@ public class GlobalExceptionHandler {
 
         ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
         return new ResponseEntity<>(erroRespostaDto, HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 }
