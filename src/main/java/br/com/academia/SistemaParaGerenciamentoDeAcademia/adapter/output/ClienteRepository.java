@@ -3,8 +3,8 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agendamento;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.CustomExeption;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IClienteRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.Logger;
@@ -50,7 +50,7 @@ public class ClienteRepository implements IClienteRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_CADASTRAR_CLIENTE);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_CADASTRAR_CLIENTE);
         }
     }
 
@@ -75,7 +75,7 @@ public class ClienteRepository implements IClienteRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_AGENDAR_TREINO);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_AGENDAR_TREINO);
         }
     }
 
@@ -100,7 +100,7 @@ public class ClienteRepository implements IClienteRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_ATUALIZAR_TREINO);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_ATUALIZAR_TREINO);
         }
     }
 
@@ -122,7 +122,7 @@ public class ClienteRepository implements IClienteRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_EXCLUIR_AGENDAMENTO);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_EXCLUIR_AGENDAMENTO);
         }
     }
 
@@ -149,7 +149,7 @@ public class ClienteRepository implements IClienteRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_BUSCAR_DADOS_PESSOAIS);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_BUSCAR_DADOS_PESSOAIS);
         }
     }
 

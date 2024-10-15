@@ -2,8 +2,8 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.login.dto.LoginRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.CustomExeption;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.ILoginRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.Logger;
@@ -37,9 +37,11 @@ public class LoginRepository implements ILoginRepository {
             });
 
         } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException(ConstantesUtils.ERRO_AO_LOGAR);
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_LOGAR);
         }
     }
 
@@ -52,9 +54,11 @@ public class LoginRepository implements ILoginRepository {
             return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Cliente.class), cpf);
 
         } catch (DataAccessException e) {
+            LOGGER.error("DataAccessException: {}", e.getMessage(), e);
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
-            throw new NegocioException(ConstantesUtils.ERRO_VERIFICAR_PESSOA);
+            LOGGER.error("Exception: {}", e.getMessage(), e);
+            throw new CustomExeption(ConstantesUtils.ERRO_VERIFICAR_PESSOA);
         }
     }
 }

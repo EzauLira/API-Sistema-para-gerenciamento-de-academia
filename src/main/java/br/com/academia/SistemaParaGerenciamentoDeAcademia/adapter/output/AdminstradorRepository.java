@@ -2,8 +2,8 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.administrador.dto.EstatisticasAcademiaResponseDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Instrutor;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.CustomExeption;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioBancoException;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.exception.NegocioException;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.output.IAdministradorRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.utils.ConstantesUtils;
 import org.slf4j.Logger;
@@ -47,7 +47,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_CADASTRAR_INSTRUTOR);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_CADASTRAR_INSTRUTOR);
         }
     }
 
@@ -74,7 +74,7 @@ public class AdminstradorRepository implements IAdministradorRepository {
             throw new NegocioBancoException(e.getMostSpecificCause().getMessage());
         } catch (Exception e) {
             LOGGER.error("Exception: {}", e.getMessage(), e);
-            throw new NegocioException(ConstantesUtils.ERRO_AO_LISTAR_ESTATISTICAS);
+            throw new CustomExeption(ConstantesUtils.ERRO_AO_LISTAR_ESTATISTICAS);
         }
     }
 
