@@ -45,4 +45,12 @@ public class GlobalExceptionHandler {
         ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
         return new ResponseEntity<>(erroRespostaDto, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(CustomExeption.class)
+    public ResponseEntity<ErroRespostaDto> handleCustomException(CustomExeption e) {
+        LOGGER.error("Custom Exeception inesperadas: {}", e.getMessage(), e);
+
+        ErroRespostaDto erroRespostaDto = new ErroRespostaDto(e.getMessage());
+        return new ResponseEntity<>(erroRespostaDto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

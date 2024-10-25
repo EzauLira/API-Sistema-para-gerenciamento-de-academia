@@ -1,7 +1,6 @@
 package br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor;
 
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.Instrutor.dto.AgendamentosDoDiaResponseDto;
-import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.IInstrutor;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;

@@ -21,6 +21,7 @@ public class LoginRepository implements ILoginRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Override
     public Cliente existePessoa(String cpf) {
         LOGGER.info("Início do método para verificar se existe pessoa - repository.");
         try{

@@ -29,6 +29,7 @@ public class SistemaControleFiltro extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger LOGGER = LoggerFactory.getLogger(SistemaControleFiltro.class);
+
     @Autowired
     private ResourceLoader resourceLoader;
 
@@ -47,6 +48,7 @@ public class SistemaControleFiltro extends OncePerRequestFilter {
             if (!checarHeadersExistente(requisicao)) {
                 envioBadRequestResposta(resposta, requisicao);
                 return;
+
             } else {
                 try {
                     String token = requisicao.getHeader("Authorization").replace("Bearer ", "");

@@ -3,6 +3,7 @@ package br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.command;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.AgendamentoRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteRequestDto;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.input.cliente.dto.ClienteResponseDto;
+import br.com.academia.SistemaParaGerenciamentoDeAcademia.adapter.output.ClienteRepository;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Agendamento;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.domain.entities.Cliente;
 import br.com.academia.SistemaParaGerenciamentoDeAcademia.port.input.ICliente;
